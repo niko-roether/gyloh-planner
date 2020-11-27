@@ -4,7 +4,7 @@ import React from "react";
 
 const useStyles = makeStyles(theme => ({
 	menuButton: {
-		marginRight: theme.spacing(2)
+		marginRight: theme.spacing(1)
 	}
 }));
 
@@ -13,16 +13,18 @@ interface PageBarProps {
 }
 
 const PageBar: React.FC<PageBarProps> = ({ title }) => {
-	const trigger = useScrollTrigger({ target: window});
+	const trigger = useScrollTrigger({ target: typeof window === "undefined" ? undefined : window});
 	const classes = useStyles();
 	return (
 		<Slide appear={false} direction="down" in={!trigger}>
 			<AppBar position="sticky">
 				<Toolbar>
-					<IconButton color="inherit" className={classes.menuButton}>
+					<IconButton edge="start" color="inherit" className={classes.menuButton}>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6">{title}</Typography>
+					<Typography variant="h6">Gyloh Vertretungsplan</Typography>
+					&nbsp;
+					<Typography variant="subtitle1">/ {title}</Typography>
 				</Toolbar>
 			</AppBar>
 		</Slide>
