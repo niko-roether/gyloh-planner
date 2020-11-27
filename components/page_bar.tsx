@@ -1,4 +1,4 @@
-import { AppBar, IconButton, makeStyles, Slide, Toolbar, Typography, useScrollTrigger } from "@material-ui/core";
+import { AppBar, IconButton, makeStyles, Slide, Toolbar, Typography, useMediaQuery, useScrollTrigger, useTheme } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import React from "react";
 
@@ -15,6 +15,8 @@ interface PageBarProps {
 const PageBar: React.FC<PageBarProps> = ({ title }) => {
 	const trigger = useScrollTrigger({ target: typeof window === "undefined" ? undefined : window});
 	const classes = useStyles();
+	const theme = useTheme();
+	const shortHeading = useMediaQuery(theme.breakpoints.down("xs"));
 	return (
 		<Slide appear={false} direction="down" in={!trigger}>
 			<AppBar position="sticky">
@@ -22,9 +24,9 @@ const PageBar: React.FC<PageBarProps> = ({ title }) => {
 					<IconButton edge="start" color="inherit" className={classes.menuButton}>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6">Gyloh Vertretungsplan</Typography>
-					&nbsp;
-					<Typography variant="subtitle1">/ {title}</Typography>
+					<Typography variant="h6">Gyloh Planner</Typography>
+					&nbsp;/&nbsp;
+					<Typography variant="subtitle1">{title}</Typography>
 				</Toolbar>
 			</AppBar>
 		</Slide>
