@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core";
 import { TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import Page from "../components/page";
-import TimeTableTableView from "../components/time_table_table_view";
 import { getCurrentTables } from "../api_consume/consume_table";
+import TimeTableView from "../components/time_table_view";
 
 const useStyles = makeStyles({
   tableHead: {
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
   }
   return (
     <Page title="Dashboard">
-      <TimeTableTableView table={table} />
+      <TimeTableView table={table} />
     </Page>
   )
 }
