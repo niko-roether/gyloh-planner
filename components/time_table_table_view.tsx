@@ -2,6 +2,7 @@ import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import { Class, EntryInit, TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import SubstitutionView from "./substitution_view";
+import { COLUMN_TITLES, infoMessageCombine, TimeTableColumn, TimeTableSubViewProps, TimeTableViewEntryFields, TimeTableViewEntryProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	tableContainer: {
@@ -27,49 +28,8 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export enum TimeTableColumn {
-	CLASS,
-	LESSON,
-	TIME,
-	SUBJECT,
-	TEACHER,
-	ROOM,
-	INFO,
-	MESSAGE,
-	INFO_MESSAGE_COMBINE
-}
 
-const columnTitles = new Map<TimeTableColumn, string>([
-	[TimeTableColumn.CLASS, 				"Klasse"],
-	[TimeTableColumn.LESSON, 				"Stunde"],
-	[TimeTableColumn.TIME, 					"Zeit"],
-	[TimeTableColumn.SUBJECT, 				"Fach"],
-	[TimeTableColumn.TEACHER, 				"Lehrer"],
-	[TimeTableColumn.ROOM, 					"Raum"],
-	[TimeTableColumn.INFO, 					"Info"],
-	[TimeTableColumn.MESSAGE, 				"Nachricht"],
-	[TimeTableColumn.INFO_MESSAGE_COMBINE, 	"Info"]
-]);
-
-const defaultColumns = [
-	TimeTableColumn.LESSON,
-	TimeTableColumn.SUBJECT,
-	TimeTableColumn.TEACHER,
-	TimeTableColumn.ROOM,
-	TimeTableColumn.INFO_MESSAGE_COMBINE
-];
-
-interface TimeTableTableViewEntryFields extends Omit<EntryInit, "classes"> {
-	class: Class;
-}
-
-export interface TimeTableTableViewEntryProps {
-	fields: TimeTableTableViewEntryFields;
-	columns: TimeTableColumn[];
-	className?: string;
-}
-
-const TimeTableTableViewEntry: React.FC<TimeTableTableViewEntryProps> = ({ fields, columns, className }) => {
+const TimeTableTableViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className }) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const shortNames = useMediaQuery<Theme>(theme.breakpoints.down("md"));
@@ -101,10 +61,7 @@ const TimeTableTableViewEntry: React.FC<TimeTableTableViewEntryProps> = ({ field
 								));
 							case TimeTableColumn.INFO: return fields.info;
 							case TimeTableColumn.MESSAGE: return fields.message;
-							case TimeTableColumn.INFO_MESSAGE_COMBINE:
-								if(fields.info !== "" && fields.message !== "") return `${fields.info}; ${fields.message}`;
-								if(fields.info !== "") return fields.info;
-								return fields.message;
+							case TimeTableColumn.INFO_MESSAGE_COMBINE: return infoMessageCombine(fields.info, fields.message);
 						}
 					})()}
 				</TableCell>
@@ -118,27 +75,26 @@ export interface TimeTableTableViewProps {
 	columns?: TimeTableColumn[]
 }
 
-const TimeTableTableView: React.FC<TimeTableTableViewProps> = ({ table, columns = defaultColumns }) => {
+const TimeTableTableView: React.FC<TimeTableSubViewProps> = ({ data, columns }) => {
 	const classes = useStyles();
-	const completeColumns = [TimeTableColumn.CLASS, ...columns];
 
-	const entryFields: TimeTableTableViewEntryFields[] = [];
+	// const entryFields: TimeTableViewEntryFields[] = [];
 	
-	table.entries.forEach((entry) => entry.classes.forEach(
-		(schoolClass) => {
-			entryFields.push({
-				class: schoolClass,
-				...entry
-			})
-		}
-	));
+	// table.entries.forEach((entry) => entry.classes.forEach(
+	// 	(schoolClass) => {
+	// 		entryFields.push({
+	// 			class: schoolClass,
+	// 			...entry
+	// 		})
+	// 	}
+	// ));
 
-	entryFields.sort((a, b) => a.class.shortName.localeCompare(b.class.shortName, "de-DE", {numeric: true}))
+	// entryFields.sort((a, b) => a.class.shortName.localeCompare(b.class.shortName, "de-DE", {numeric: true}))
 
-	const entries = entryFields.map((ef, i) => (
+	const entries = data.map((ef, i) => (
 		<TimeTableTableViewEntry 
 		fields={ef}
-		columns={completeColumns}
+		columns={columns}
 		key={i}
 		className={classes.row}
 	/>
@@ -149,9 +105,9 @@ const TimeTableTableView: React.FC<TimeTableTableViewProps> = ({ table, columns 
 			<Table stickyHeader>
 				<TableHead>
 					<TableRow>
-						{completeColumns.map((column, i) => (
+						{columns.map((column, i) => (
 							<TableCell key={i} className={classes.tableHeaderCell}>
-								{columnTitles.get(column)}
+								{COLUMN_TITLES.get(column)}
 							</TableCell>
 						))}
 					</TableRow>
