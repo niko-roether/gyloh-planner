@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const TimeTableTableViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className }) => {
+const TimeTableDesktopViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className }) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const shortNames = useMediaQuery<Theme>(theme.breakpoints.down("md"));
@@ -75,24 +75,11 @@ export interface TimeTableTableViewProps {
 	columns?: TimeTableColumn[]
 }
 
-const TimeTableTableView: React.FC<TimeTableSubViewProps> = ({ data, columns }) => {
+const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data, columns }) => {
 	const classes = useStyles();
 
-	// const entryFields: TimeTableViewEntryFields[] = [];
-	
-	// table.entries.forEach((entry) => entry.classes.forEach(
-	// 	(schoolClass) => {
-	// 		entryFields.push({
-	// 			class: schoolClass,
-	// 			...entry
-	// 		})
-	// 	}
-	// ));
-
-	// entryFields.sort((a, b) => a.class.shortName.localeCompare(b.class.shortName, "de-DE", {numeric: true}))
-
 	const entries = data.map((ef, i) => (
-		<TimeTableTableViewEntry 
+		<TimeTableDesktopViewEntry 
 		fields={ef}
 		columns={columns}
 		key={i}
@@ -120,4 +107,4 @@ const TimeTableTableView: React.FC<TimeTableSubViewProps> = ({ data, columns }) 
 	)
 }
 
-export default TimeTableTableView;
+export default TimeTableDesktopView;

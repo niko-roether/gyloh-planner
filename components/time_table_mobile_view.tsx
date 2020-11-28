@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 })
 
 
-const TimeTableColumnViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className}) => {
+const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className}) => {
 	const [open, setOpen] = useState<boolean>(false);
 	const toggleOpen = () => setOpen(prev => !prev);
 	const classes = useStyles();
@@ -89,9 +89,9 @@ const TimeTableColumnViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 	);
 }
 
-const TimeTableColumnView: React.FC<TimeTableSubViewProps> = ({ data, columns}) => {
+const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data, columns}) => {
 	const entries = data.map((ef, i) => (
-		<TimeTableColumnViewEntry 
+		<TimeTableMobileViewEntry 
 			fields={ef}
 			columns={columns}
 		/>
@@ -104,4 +104,4 @@ const TimeTableColumnView: React.FC<TimeTableSubViewProps> = ({ data, columns}) 
 	)
 }
 
-export default TimeTableColumnView;
+export default TimeTableMobileView;

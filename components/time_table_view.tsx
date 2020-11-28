@@ -1,8 +1,8 @@
 import { makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import { Class, EntryInit, TimeTable } from "gyloh-webuntis-api";
 import React from "react";
-import TimeTableColumnView from "./time_table_column_view";
-import TimeTableTableView from "./time_table_table_view";
+import TimeTableMobileView from "./time_table_mobile_view";
+import TimeTableDesktopView from "./time_table_desktop_view";
 
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -100,8 +100,8 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table, columns = DEFAULT_
 		<div className={classes.container}>
 			<Typography className={classes.heading} variant="h4">Vertretungsplan {table.date.toLocaleDateString("de-De")}</Typography>
 			{useColumnView 
-				? <TimeTableColumnView data={entryFields} columns={completeColumns} />
-				: <TimeTableTableView data={entryFields} columns={completeColumns} />
+				? <TimeTableMobileView data={entryFields} columns={completeColumns} />
+				: <TimeTableDesktopView data={entryFields} columns={completeColumns} />
 			}
 		</div>
 	)
