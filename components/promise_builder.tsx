@@ -3,19 +3,24 @@ import React from "react";
 
 const useStyles = makeStyles(theme => ({
 	defaultPlaceholder: {
-		margin: theme.spacing(2, "auto")
+		textAlign: "center",
+		margin: theme.spacing(8, "auto")
 	}
 }));
 
-interface PromiseBuilderProps<T> {
+export interface PromiseBuilderProps<T> {
 	promise: Promise<T>
 	placeholder?: React.ReactElement,
-	children?: (value: T) => React.ReactElement
+	children?: (value: T) => React.ReactElement | null
 }
 
 const DefaultPromiseBuilderPlaceholder: React.FC = () => {
 	const classes = useStyles();
-	return <CircularProgress className={classes.defaultPlaceholder} />;
+	return (
+		<div className={classes.defaultPlaceholder}>
+			<CircularProgress />
+		</div>
+	);
 }
 
 function PromiseBuilder<T>({ promise, placeholder, children}: PromiseBuilderProps<T>): React.ReactElement {
