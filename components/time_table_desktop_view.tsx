@@ -1,14 +1,13 @@
-import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme, Typography, useMediaQuery, useTheme } from "@material-ui/core";
-import { Class, EntryInit, TimeTable } from "gyloh-webuntis-api";
+import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useMediaQuery, useTheme } from "@material-ui/core";
+import { TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import SubstitutionView from "./substitution_view";
-import { COLUMN_TITLES, infoMessageCombine, TimeTableColumn, TimeTableSubViewProps, TimeTableViewEntryFields, TimeTableViewEntryProps } from "./time_table_view";
+import { COLUMN_TITLES, infoMessageCombine, TimeTableColumn, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	tableContainer: {
-		height: "80vh",
-		maxHeight: "700",
-		marginTop: theme.spacing(2)
+		maxHeight: "min(80vh, 700px)",
+		marginTop: theme.spacing(3)
 	},
 	tableHeaderCell: {
 		fontWeight: "bold",
@@ -77,7 +76,6 @@ export interface TimeTableTableViewProps {
 
 const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data, columns }) => {
 	const classes = useStyles();
-	const theme = useTheme();
 
 	const entries = data.map((ef, i) => (
 		<TimeTableDesktopViewEntry 
