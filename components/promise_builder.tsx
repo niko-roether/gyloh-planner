@@ -1,9 +1,10 @@
-import { CircularProgress, makeStyles } from "@material-ui/core";
+import { Box, CircularProgress, Container, makeStyles } from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles(theme => ({
 	defaultPlaceholder: {
 		textAlign: "center",
+		width: "100%",
 		margin: theme.spacing(8, "auto")
 	}
 }));
@@ -11,15 +12,15 @@ const useStyles = makeStyles(theme => ({
 export interface PromiseBuilderProps<T> {
 	promise: Promise<T>
 	placeholder?: React.ReactElement,
-	children?: (value: T) => React.ReactElement | null
+	children?: (value: T) => JSX.Element[] | JSX.Element | null
 }
 
 const DefaultPromiseBuilderPlaceholder: React.FC = () => {
 	const classes = useStyles();
 	return (
-		<div className={classes.defaultPlaceholder}>
+		<Box textAlign="center">
 			<CircularProgress />
-		</div>
+		</Box>
 	);
 }
 
@@ -27,7 +28,11 @@ function PromiseBuilder<T>({ promise, placeholder, children}: PromiseBuilderProp
 	const [data, setData] = React.useState<T | null>(null);
 	promise.then(d => setData(d));
 	if(data == null) return placeholder || <DefaultPromiseBuilderPlaceholder />
-	return children?.call(null, data) || <div />;
+	return (
+		<React.Fragment>
+			{children?.call(null, data) || <div />}
+		</React.Fragment>
+	);
 }
 
 export default PromiseBuilder;
