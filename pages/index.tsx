@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const [table, setTable] = React.useState<TimeTable | null>(null);
   const classes = useStyles();
   if(table == null) {
-    getCurrentTables(2).then(tables => setTable(tables[1]));
+    getCurrentTables(1).then(tables => setTable(tables[0]));
     return <Page title="Dashboard" />
   }
   return (
