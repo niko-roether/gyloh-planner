@@ -13,8 +13,12 @@ function parseTable(data: any): TimeTable {
 	});
 }
 
-async function getCurrentTables(num: number): Promise<TimeTable[]> {
-	const data = await fetch(API_BASE + `/current?num=${num}`).then(res => res.json());
+async function getCurrentTables(num: number): Promise<TimeTable[] | null> {
+	const data = await fetch(API_BASE + `/current?num=${num}`).then(res => {
+		if(res.status != 200) return null;
+		return res.json()
+	});
+	if(data == null) return null;
 	return data.map((d: any) => parseTable(d));
 }
 
