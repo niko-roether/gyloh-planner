@@ -1,28 +1,36 @@
-import { Button, ButtonBase, CardActionArea, Collapse, Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Table, TableCell, TableRow } from "@material-ui/core";
+import { Card, Collapse, List, makeStyles, Table, TableCell, TableRow, Typography } from "@material-ui/core";
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import React, { useState } from "react";
 import SubstitutionView from "./substitution_view";
 import { COLUMN_TITLES, infoMessageCombine, TimeTableColumn, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
-	tableHead: {
-		fontWeight: "bold",
+	card: {
+		padding: theme.spacing(2, 3),
+		margin: theme.spacing(2, 1),
 	},
-	tableRow: {
-		"&:nth-child(4n+1), &:nth-child(4n+2)": {
-			background: theme.palette.grey[100]
-		}
+	topBar: {
+		display: "flex",
+		justifyContent: "space-between",
 	},
-	tableCell: {
-		minWidth: 80
+	textWrapper: {
+		height: "100%",
+		flex: 4,
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-between"
 	},
-	tableButtonCell: {
-		textAlign: "center"
+	subTextWrapper: {
+		width: "100%",
+		maxWidth: 200,
+		display: "inline-flex",
+		justifyContent: "space-between"
 	},
-	tableContentCell: {
-		paddingTop: 0,
-		paddingBottom: 0,
-		border: "none"
+	buttonWrapper: {
+		flex: 1,
+		display: "flex",
+		justifyContent: "flex-end",
+		alignItems: "center"
 	}
 }))
 
@@ -39,41 +47,58 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 	].includes(c));
 
 	return (
-		<React.Fragment>
-			<TableRow className={classes.tableRow}>
-				{prominentColumns.map((column, i) => {
-					let data;
-					let className = classes.tableCell;
-					switch(column) {
-						case TimeTableColumn.CLASS:
-							data = fields.class.shortName;
-							className = classes.tableHead;
-							break;
-						case TimeTableColumn.SUBJECT:
-							data = fields.subject.shortName;
-							break;
-						case TimeTableColumn.LESSON:
-							data = fields.lesson;
-							break;
-						case TimeTableColumn.INFO_MESSAGE_COMBINE:
-							data = infoMessageCombine(fields.info, fields.message);
+		<Card className={classes.card} variant="outlined" onClick={toggleOpen}>
+			<div className={classes.topBar}>
+				<div className={classes.textWrapper}>
+					{prominentColumns.includes(TimeTableColumn.CLASS) && 
+						<Typography variant="subtitle1">{fields.class.longName}</Typography>
 					}
-					return <TableCell key={i} className={className}>{data}</TableCell>
-				})}
-				<TableCell align="center">
-					<IconButton size="small" onClick={toggleOpen}>
-						{open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-					</IconButton>
-				</TableCell>
-			</TableRow>
-			<TableRow>
-				<TableCell className={classes.tableContentCell} colSpan={prominentColumns.length + 1}>
-					<Collapse appear={false} in={open}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores sed molestias quibusdam quis ex soluta quos. Iste suscipit voluptas sequi itaque vel cupiditate eligendi maxime perferendis, laborum consequuntur incidunt nam.
-					</Collapse>
-				</TableCell>
-			</TableRow>
-		</React.Fragment>
+					<span className={classes.subTextWrapper}>
+						{prominentColumns.includes(TimeTableColumn.SUBJECT) &&
+							<Typography variant="subtitle2">{fields.subject.longName}</Typography>
+						}
+						{prominentColumns.includes(TimeTableColumn.LESSON) &&
+							<Typography variant="subtitle2">{fields.lesson}</Typography>
+						}
+					</span>
+				</div>
+				<div className={classes.buttonWrapper}>
+					{open ? <ExpandLessIcon color="action" /> : <ExpandMoreIcon color="action" />}
+				</div>
+			</div>
+			<Collapse appear={false} in={open}>
+				<Table>
+					{columns.filter(c => !prominentColumns.includes(c)).map(column => {
+						const name = COLUMN_TITLES.get(column);
+						let data;
+						switch(column) {
+							case TimeTableColumn.TEACHER:
+								data = <SubstitutionView value={fields.teacher} current={c => c} subst={s => s} />
+								break;
+							case TimeTableColumn.ROOM:
+								data = fields.rooms.map(room => (
+									<SubstitutionView value={room} current={r => r?.longName} subst={r => r?.longName} />
+								));
+								break;
+							case TimeTableColumn.INFO:
+								data = fields.info;
+								break;
+							case TimeTableColumn.MESSAGE:
+								data = fields.message;
+								break;
+							case TimeTableColumn.INFO_MESSAGE_COMBINE:
+								data = infoMessageCombine(fields.info, fields.message);
+						}
+						return (
+							<TableRow>
+								<TableCell><b>{name}</b></TableCell>
+								<TableCell>{data}</TableCell>
+							</TableRow>
+						)
+					})}
+				</Table>
+			</Collapse>
+		</Card>
 	);
 }
 
@@ -87,9 +112,9 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data, columns}) 
 	));
 
 	return (
-		<Table size="small">
+		<List>
 			{entries}
-		</Table>
+		</List>
 	)
 }
 
