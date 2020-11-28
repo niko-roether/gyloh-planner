@@ -17,13 +17,12 @@ const useStyles = makeStyles(theme => ({
 	},
 	row: {
 		"&:nth-child(odd)": {
-			background: theme.palette.grey[200],
+			background: theme.palette.grey[100],
 		}	
 	},
 	cell: {
 		"&:first-child": {
 			fontWeight: "bold",
-			background: theme.palette.grey[200],
 		}
 	}
 }));
@@ -32,17 +31,18 @@ const useStyles = makeStyles(theme => ({
 const TimeTableDesktopViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className }) => {
 	const classes = useStyles();
 	const theme = useTheme();
-	const shortNames = useMediaQuery<Theme>(theme.breakpoints.down("md"));
+	const shortNames = useMediaQuery(theme.breakpoints.down("md"));
+	const shorterNames = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<TableRow className={className}>
 			{columns.map((column, i) => (
 				<TableCell key={i} className={classes.cell}>
 					{(() => {
 						switch(column) {
-							case TimeTableColumn.CLASS: return shortNames ? fields.class.shortName : fields.class.longName;
+							case TimeTableColumn.CLASS: return shorterNames ? fields.class.shortName : fields.class.longName;
 							case TimeTableColumn.LESSON: return fields.lesson;
 							case TimeTableColumn.TIME: return fields.time;
-							case TimeTableColumn.SUBJECT: return shortNames ? fields.subject.shortName : fields.subject.longName;
+							case TimeTableColumn.SUBJECT: return shorterNames ? fields.subject.shortName : fields.subject.longName;
 							case TimeTableColumn.TEACHER:
 								return (
 									<SubstitutionView 
@@ -77,6 +77,7 @@ export interface TimeTableTableViewProps {
 
 const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data, columns }) => {
 	const classes = useStyles();
+	const theme = useTheme();
 
 	const entries = data.map((ef, i) => (
 		<TimeTableDesktopViewEntry 
