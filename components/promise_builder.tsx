@@ -1,24 +1,15 @@
-import { Box, CircularProgress, Container, makeStyles } from "@material-ui/core";
+import { Box, CircularProgress, makeStyles } from "@material-ui/core";
 import React from "react";
-
-const useStyles = makeStyles(theme => ({
-	defaultPlaceholder: {
-		textAlign: "center",
-		width: "100%",
-		margin: theme.spacing(8, "auto")
-	}
-}));
 
 export interface PromiseBuilderProps<T> {
 	promise: Promise<T>
 	placeholder?: React.ReactElement,
-	children?: (value: T) => JSX.Element[] | JSX.Element | null
+	children?: (value: T) => JSX.Element | null
 }
 
 const DefaultPromiseBuilderPlaceholder: React.FC = () => {
-	const classes = useStyles();
 	return (
-		<Box textAlign="center">
+		<Box textAlign="center" width="100%">
 			<CircularProgress />
 		</Box>
 	);
@@ -28,11 +19,7 @@ function PromiseBuilder<T>({ promise, placeholder, children}: PromiseBuilderProp
 	const [data, setData] = React.useState<T | null>(null);
 	promise.then(d => setData(d));
 	if(data == null) return placeholder || <DefaultPromiseBuilderPlaceholder />
-	return (
-		<React.Fragment>
-			{children?.call(null, data) || <div />}
-		</React.Fragment>
-	);
+	return children?.call(null, data) || <div />;
 }
 
 export default PromiseBuilder;
