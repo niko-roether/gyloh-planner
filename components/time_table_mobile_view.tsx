@@ -1,4 +1,4 @@
-import { Card, Collapse, List, makeStyles, Table, TableCell, TableRow, Typography } from "@material-ui/core";
+import { Card, Collapse, List, makeStyles, Table, TableBody, TableCell, TableRow, Typography } from "@material-ui/core";
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import React, { useState } from "react";
 import SubstitutionView from "./substitution_view";
@@ -47,7 +47,7 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 	].includes(c));
 
 	return (
-		<Card className={classes.card} variant="outlined" onClick={toggleOpen}>
+		<Card className={classes.card + " " + className} variant="outlined" onClick={toggleOpen}>
 			<div className={classes.topBar}>
 				<div className={classes.textWrapper}>
 					{prominentColumns.includes(TimeTableColumn.CLASS) && 
@@ -68,34 +68,38 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 			</div>
 			<Collapse appear={false} in={open}>
 				<Table>
-					{columns.filter(c => !prominentColumns.includes(c)).map(column => {
-						const name = COLUMN_TITLES.get(column);
-						let data;
-						switch(column) {
-							case TimeTableColumn.TEACHER:
-								data = <SubstitutionView value={fields.teacher} current={c => c} subst={s => s} />
-								break;
-							case TimeTableColumn.ROOM:
-								data = fields.rooms.map(room => (
-									<SubstitutionView value={room} current={r => r?.longName} subst={r => r?.longName} />
-								));
-								break;
-							case TimeTableColumn.INFO:
-								data = fields.info;
-								break;
-							case TimeTableColumn.MESSAGE:
-								data = fields.message;
-								break;
-							case TimeTableColumn.INFO_MESSAGE_COMBINE:
-								data = infoMessageCombine(fields.info, fields.message);
-						}
-						return (
-							<TableRow>
-								<TableCell><b>{name}</b></TableCell>
-								<TableCell>{data}</TableCell>
-							</TableRow>
-						)
-					})}
+					<TableBody>
+						<TableRow>
+							{columns.filter(c => !prominentColumns.includes(c)).map((column, i) => {
+								const name = COLUMN_TITLES.get(column);
+								let data;
+								switch(column) {
+									case TimeTableColumn.TEACHER:
+										data = <SubstitutionView value={fields.teacher} current={c => c} subst={s => s} />
+										break;
+									case TimeTableColumn.ROOM:
+										data = fields.rooms.map((room, i) => (
+											<SubstitutionView key={i} value={room} current={r => r?.longName} subst={r => r?.longName} />
+										));
+										break;
+									case TimeTableColumn.INFO:
+										data = fields.info;
+										break;
+									case TimeTableColumn.MESSAGE:
+										data = fields.message;
+										break;
+									case TimeTableColumn.INFO_MESSAGE_COMBINE:
+										data = infoMessageCombine(fields.info, fields.message);
+								}
+								return (
+									<React.Fragment>
+										<TableCell><b>{name}</b></TableCell>
+										<TableCell>{data}</TableCell>
+									</React.Fragment>
+								)
+							})}
+						</TableRow>
+					</TableBody>
 				</Table>
 			</Collapse>
 		</Card>
@@ -112,9 +116,9 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data, columns}) 
 	));
 
 	return (
-		<List>
+		<React.Fragment>
 			{entries}
-		</List>
+		</React.Fragment>
 	)
 }
 
