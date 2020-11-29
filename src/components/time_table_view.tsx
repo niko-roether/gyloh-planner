@@ -66,10 +66,10 @@ const htmlParser = new HTMLParser();
 const ResponsiveTimeTableView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	return (
 		<React.Fragment>
-			<Hidden mdUp implementation="css">
+			<Hidden mdUp>
 				<TimeTableMobileView data={data} />
 			</Hidden>
-			<Hidden smDown implementation="css">
+			<Hidden smDown>
 				<TimeTableDesktopView data={data} />
 			</Hidden>
 		</React.Fragment>
