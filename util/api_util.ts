@@ -47,7 +47,7 @@ function requireQueryArg(req: NextApiRequest, res: NextApiResponse, arg: string,
 function jsonEncodeTable(table: TimeTable) {
 	return JSON.stringify({
 		...table,
-		date: table.date.toISOString().split("T")[0],
+		date: table.date.setHours(0, 0, 0)
 	})
 }
 
