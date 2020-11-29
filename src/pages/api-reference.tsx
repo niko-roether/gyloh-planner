@@ -3,13 +3,11 @@ import { GylohWebUntis } from "gyloh-webuntis-api";
 import { GetStaticProps } from "next";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import Heading from "../components/heading";
 import Page from "../components/page";
 import { server } from "../config";
 
 const useStyles = makeStyles(theme => ({
-	heading: {
-		margin: theme.spacing(6, 0, 3)
-	},
 	example: {
 		maxHeight: "80vh",
 		overflow: "auto"
@@ -27,7 +25,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 	return (
 		<Page title="API-Referenz">
 			<Container>
-				<Typography variant="h3" className={classes.heading} id="api-reference">API-Referenz</Typography>
+				<Heading variant="h3" id="api-reference">API-Referenz</Heading>
 				<Typography paragraph>
 					Dieser Server stellt eine rudimentäre REST API zur Verfügung. Sie erlaubt, die Vertretungsplandaten entweder 
 					eine bestimmte Anzahl an <a href="#current-tables">aktuellen Plänen</a> (d. h. entweder von Heute, oder von 
@@ -39,7 +37,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					für ein Beispiel siehe <a href="#example">Beispiel</a>.
 				</Typography>
 
-				<Typography variant="h4" className={classes.heading} id="current-tables">Aktuelle Vertretungspläne</Typography>
+				<Heading variant="h4" id="current-tables">Aktuelle Vertretungspläne</Heading>
 				<Typography paragraph>
 					Aktuelle Pläne können unter <code>{server}/api/tables/current?num=[num]</code> gefunden werden, wobei <code>[num]</code>
 					die Anzahl an Plänen ist, die abgerufen werden sollen, anfangend mit dem nächsten Schultag. Die Ergebnisse werden in
@@ -49,7 +47,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					Die Ergebnisse werden in Form eines Arrays an Vertretungsplänen ausgegeben (Siehe <a href="#output-format">Ausgabeformat</a>).
 				</Typography>
 
-				<Typography variant="h4" className={classes.heading} id="specific-tables">Bestimmte Vertretungspläne</Typography>
+				<Heading variant="h4" id="specific-tables">Bestimmte Vertretungspläne</Heading>
 				<Typography paragraph>
 					Bestimmte Vertretungspläne können unter <code>{server}/api/tables/get?date=[date]</code> gefunden werden, 
 					wobei <code>[date]</code> das entsprechende Datum ist. Ich empfehle als Format einen Timestamp in Form der Anzahl an 
@@ -66,12 +64,12 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					(Siehe <a href="#output-format">Ausgabeformat</a>).
 				</Typography>
 
-				<Typography variant="h4" className={classes.heading} id="output-format">Ausgabeformat</Typography>
+				<Heading variant="h4" id="output-format">Ausgabeformat</Heading>
 				<Typography paragraph>
 					Sämtliche Ausgaben erfolgen im JSON-Format, auch im Fall eines Fehlers.
 				</Typography>
 
-				<Typography variant="h5" className={classes.heading} id="output-format-general">Allgemein</Typography>
+				<Heading variant="h5" id="output-format-general">Allgemein</Heading>
 				<Typography paragraph>
 					Das allgemeine Ausgabeformat, dem alle Antworten dieser API folgen, hat folgendes Format:
 				</Typography>
@@ -94,7 +92,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					werden kann, dass tatsächlich ein Fehler stattfand und keine Daten in der Antwort enthalten sind.
 				</Typography>
 
-				<Typography variant="h5" className={classes.heading} id="output-format-table">Vertretungspläne</Typography>
+				<Heading variant="h5" id="output-format-table">Vertretungspläne</Heading>
 				<Typography paragraph>
 					{/* TODO update this if necessary */}
 					Alle Ausgaben dieser API beinhalten Vertretungspläne. Diese haben das folgende Format:
@@ -173,7 +171,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					}
 				</SyntaxHighlighter>
 				
-				<Typography variant="h5" className={classes.heading} id="output-format-substitutions">Vertretungen</Typography>
+				<Heading variant="h5" id="output-format-substitutions">Vertretungen</Heading>
 				<Typography paragraph>
 					Leider ist dies der unintuitivste Teil der API, aber ich habe keine bessere Lösung gefunden.
 				</Typography>
@@ -206,7 +204,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					unterrichtet, aber vertreten wird, oder der Raum, in dem der Unterricht normalerweise stattfindet.
 				</Typography>
 
-				<Typography variant="h4" className={classes.heading} id="example">Beispiel</Typography>
+				<Heading variant="h4" id="example">Beispiel</Heading>
 				<Typography paragraph>
 					Dies ist ein Beispieloutput für das Abrufen eines aktuellen Vertretungsplans am {new Date(exampleDate).toLocaleDateString("de-DE")}.
 				</Typography>
