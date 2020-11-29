@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   );
 
   return (
-    <Page title="Dashboard">
+    <Page title="Vertretungsplan">
       {content}
     </Page>
   )
