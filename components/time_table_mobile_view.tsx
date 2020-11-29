@@ -5,9 +5,8 @@ import SubstitutionView from "./substitution_view";
 import { COLUMN_TITLES, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
-	card: {
-		padding: theme.spacing(2, 3),
-		margin: theme.spacing(2, 1),
+	list: {
+		margin: theme.spacing(3, 0)
 	},
 	topBar: {
 		display: "flex",
@@ -78,6 +77,8 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields })
 }
 
 const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
+	const classes = useStyles();
+	
 	const entries = data.map((ef, i) => (
 		<TimeTableMobileViewEntry
 			key={i}
@@ -86,9 +87,9 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	));
 
 	return (
-		<React.Fragment>
+		<div className={classes.list}>
 			{entries}
-		</React.Fragment>
+		</div>
 	)
 }
 
