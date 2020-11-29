@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import { GylohWebUntis } from "gyloh-webuntis-api";
-import { apiError, apiRawResponse, apiResponse, jsonEncodeTable, requireMethods, requireQueryArg, runMiddleware } from "../../../util/api_util";
+import { apiError, apiRawResponse, jsonEncodeTable, requireMethods, requireQueryArg, runMiddleware } from "../../../util/api_util";
 import Cors from "cors";
 
 const legalMethods = ["GET", "HEAD"];
