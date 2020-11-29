@@ -3,7 +3,7 @@ import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { CalendarToday, KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import React from "react";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	stepper: {
 		flex: 4
 	},
@@ -15,8 +15,11 @@ const useStyles = makeStyles({
 		display: "flex",
 		flexDirection: "column",
 		justifyContent: "center"
+	},
+	mobileStepper: {
+		borderTop: `1px ${theme.palette.divider} solid`,
 	}
-})
+}));
 
 export interface ResponsiveListViewProps<P> {
 	component?: React.ElementType<P>;
@@ -47,6 +50,7 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 							variant="text"
 							activeStep={index}
 							steps={elements.length}
+							className={classes.mobileStepper}
 							nextButton={
 								<Button size="small" onClick={toNext} disabled={index === elements.length - 1}>
 								Next
