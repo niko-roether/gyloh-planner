@@ -5,11 +5,8 @@ const API_BASE = server + "/api/tables"
 
 function parseTable(data: any): TimeTable {
 	return new TimeTable({
+		...data,
 		date: new Date(data.date),
-		lastUpdate: data.lastUpdate,
-		affectedClasses: data.affectedClasses,
-		messages: data.messages,
-		entries: data.entries
 	});
 }
 
