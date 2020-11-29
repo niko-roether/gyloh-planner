@@ -1,4 +1,4 @@
-import { Container, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import { Container, Hidden, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import { Class, Room, Subject, Substitution, TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import TimeTableMobileView from "./time_table_mobile_view";
@@ -63,11 +63,22 @@ function infoMessageCombine(info: string, message: string) {
 
 const htmlParser = new HTMLParser();
 
+const ResponsiveTimeTableView: React.FC<TimeTableSubViewProps> = ({ data }) => {
+	return (
+		<React.Fragment>
+			<Hidden mdUp implementation="css">
+				<TimeTableMobileView data={data} />
+			</Hidden>
+			<Hidden smDown implementation="css">
+				<TimeTableDesktopView data={data} />
+			</Hidden>
+		</React.Fragment>
+	)
+}
+
 const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 	const entryFields: TimeTableViewEntryFields[] = [];
 	const classes = useStyles();
-	const theme = useTheme();
-	const useColumnView = useMediaQuery(theme.breakpoints.down("sm"));
 	
 	table.entries.forEach((entry) => entry.classes.forEach(
 		(schoolClass) => {
@@ -98,10 +109,7 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 					</ListItem>
 				))}
 			</List>
-			{useColumnView 
-				? <TimeTableMobileView data={entryFields} />
-				: <TimeTableDesktopView data={entryFields} />
-			}
+			<ResponsiveTimeTableView data={entryFields} />
 		</Container>
 	)
 }
