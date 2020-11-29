@@ -4,12 +4,17 @@ import Page from "../components/page";
 import { getCurrentTables } from "../api_consume/consume_table";
 import TimeTableView from "../components/time_table_view";
 import PromiseBuilder from "../components/promise_builder";
+import ResponsiveListView from "../components/responsive_list_view";
 
 const Home: React.FC = () => {
   return (
     <Page title="Dashboard">
       <PromiseBuilder promise={getCurrentTables(3)}>
-        {tables => tables && tables.map(table => <TimeTableView table={table} />)}
+        {tables => tables && 
+          <ResponsiveListView>
+            {tables.map((table, i) => <TimeTableView table={table} key={i} />)}
+          </ResponsiveListView>
+        }
       </PromiseBuilder>
     </Page>
   )
