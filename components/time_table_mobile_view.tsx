@@ -69,7 +69,6 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 			<Collapse appear={false} in={open}>
 				<Table>
 					<TableBody>
-						<TableRow>
 							{columns.filter(c => !prominentColumns.includes(c)).map((column, i) => {
 								const name = COLUMN_TITLES.get(column);
 								let data;
@@ -92,13 +91,12 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 										data = infoMessageCombine(fields.info, fields.message);
 								}
 								return (
-									<React.Fragment>
+									<TableRow>
 										<TableCell><b>{name}</b></TableCell>
 										<TableCell>{data}</TableCell>
-									</React.Fragment>
+									</TableRow>
 								)
 							})}
-						</TableRow>
 					</TableBody>
 				</Table>
 			</Collapse>
