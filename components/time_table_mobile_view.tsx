@@ -1,8 +1,8 @@
-import { Card, Collapse, List, makeStyles, Table, TableBody, TableCell, TableRow, Typography } from "@material-ui/core";
+import { Card, Collapse, makeStyles, Table, TableBody, TableCell, TableRow, Typography } from "@material-ui/core";
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import React, { useState } from "react";
 import SubstitutionView from "./substitution_view";
-import { COLUMN_TITLES, infoMessageCombine, TimeTableColumn, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
+import { COLUMN_TITLES, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -35,31 +35,19 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className}) => {
+const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields }) => {
 	const [open, setOpen] = useState<boolean>(false);
 	const toggleOpen = () => setOpen(prev => !prev);
 	const classes = useStyles();
 
-	const prominentColumns = columns.filter(c => [
-		TimeTableColumn.CLASS,
-		TimeTableColumn.SUBJECT,
-		TimeTableColumn.LESSON,
-	].includes(c));
-
 	return (
-		<Card className={classes.card + " " + className} variant="outlined" onClick={toggleOpen}>
+		<Card className={classes.card} variant="outlined" onClick={toggleOpen}>
 			<div className={classes.topBar}>
 				<div className={classes.textWrapper}>
-					{prominentColumns.includes(TimeTableColumn.CLASS) && 
-						<Typography variant="subtitle1">{fields.class.longName}</Typography>
-					}
+					<Typography variant="subtitle1">{fields.class.longName}</Typography>
 					<span className={classes.subTextWrapper}>
-						{prominentColumns.includes(TimeTableColumn.SUBJECT) &&
-							<Typography variant="subtitle2">{fields.subject.longName}</Typography>
-						}
-						{prominentColumns.includes(TimeTableColumn.LESSON) &&
-							<Typography variant="subtitle2">{fields.lesson}</Typography>
-						}
+						<Typography variant="subtitle2">{fields.subject.longName}</Typography>
+						<Typography variant="subtitle2">{fields.lesson}</Typography>
 					</span>
 				</div>
 				<div className={classes.buttonWrapper}>
@@ -69,34 +57,22 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 			<Collapse appear={false} in={open}>
 				<Table>
 					<TableBody>
-							{columns.filter(c => !prominentColumns.includes(c)).map((column, i) => {
-								const name = COLUMN_TITLES.get(column);
-								let data;
-								switch(column) {
-									case TimeTableColumn.TEACHER:
-										data = <SubstitutionView value={fields.teacher} current={c => c} subst={s => s} />
-										break;
-									case TimeTableColumn.ROOM:
-										data = fields.rooms.map((room, i) => (
-											<SubstitutionView key={i} value={room} current={r => r?.longName} subst={r => r?.longName} />
-										));
-										break;
-									case TimeTableColumn.INFO:
-										data = fields.info;
-										break;
-									case TimeTableColumn.MESSAGE:
-										data = fields.message;
-										break;
-									case TimeTableColumn.INFO_MESSAGE_COMBINE:
-										data = infoMessageCombine(fields.info, fields.message);
-								}
-								return (
-									<TableRow>
-										<TableCell><b>{name}</b></TableCell>
-										<TableCell>{data}</TableCell>
-									</TableRow>
-								)
-							})}
+							<TableRow>
+								<TableCell><b>{COLUMN_TITLES.teacher}</b></TableCell>
+								<TableCell><SubstitutionView value={fields.teacher} current={c => c} subst={s => s} /></TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell><b>{COLUMN_TITLES.room}</b></TableCell>
+								<TableCell>
+									{fields.rooms.map((room, i) => (
+										<SubstitutionView key={i} value={room} current={r => r?.longName} subst={r => r?.longName} />
+									))}
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell><b>{COLUMN_TITLES.info}</b></TableCell>
+								<TableCell>{fields.info}</TableCell>
+							</TableRow>
 					</TableBody>
 				</Table>
 			</Collapse>
@@ -104,12 +80,11 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, c
 	);
 }
 
-const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data, columns}) => {
+const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	const entries = data.map((ef, i) => (
 		<TimeTableMobileViewEntry
 			key={i}
 			fields={ef}
-			columns={columns}
 		/>
 	));
 

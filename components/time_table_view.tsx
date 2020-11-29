@@ -1,5 +1,5 @@
 import { Container, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
-import { Class, EntryInit, TimeTable } from "gyloh-webuntis-api";
+import { Class, EntryInit, Room, Subject, Substitution, TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import TimeTableMobileView from "./time_table_mobile_view";
 import TimeTableDesktopView from "./time_table_desktop_view";
@@ -24,56 +24,35 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-export enum TimeTableColumn {
-	CLASS,
-	LESSON,
-	TIME,
-	SUBJECT,
-	TEACHER,
-	ROOM,
-	INFO,
-	MESSAGE,
-	INFO_MESSAGE_COMBINE
+
+const COLUMN_TITLES = {
+	class: "Klasse",
+	lesson: "Stunde",
+	subject: "Fach",
+	teacher: "Lehrer",
+	room: "Raum",
+	info: "Info",
 }
 
-const COLUMN_TITLES = new Map<TimeTableColumn, string>([
-	[TimeTableColumn.CLASS, 				"Klasse"],
-	[TimeTableColumn.LESSON, 				"Stunde"],
-	[TimeTableColumn.TIME, 					"Zeit"],
-	[TimeTableColumn.SUBJECT, 				"Fach"],
-	[TimeTableColumn.TEACHER, 				"Lehrer"],
-	[TimeTableColumn.ROOM, 					"Raum"],
-	[TimeTableColumn.INFO, 					"Info"],
-	[TimeTableColumn.MESSAGE, 				"Nachricht"],
-	[TimeTableColumn.INFO_MESSAGE_COMBINE, 	"Info"]
-]);
-
-const DEFAULT_COLUMNS = [
-	TimeTableColumn.LESSON,
-	TimeTableColumn.SUBJECT,
-	TimeTableColumn.TEACHER,
-	TimeTableColumn.ROOM,
-	TimeTableColumn.INFO_MESSAGE_COMBINE
-];
-
-export interface TimeTableViewEntryFields extends Omit<EntryInit, "classes"> {
-	class: Class;
+export interface TimeTableViewEntryFields {
+	class: Class,
+	lesson: string,
+	subject: Subject,
+	teacher: string | Substitution<string>,
+	rooms: (Room | Substitution<Room>)[],
+	info: string
 }
 
 export interface TimeTableViewEntryProps {
 	fields: TimeTableViewEntryFields;
-	columns: TimeTableColumn[];
-	className?: string;
 }
 
 export interface TimeTableSubViewProps {
 	data: TimeTableViewEntryFields[];
-	columns: TimeTableColumn[];
 }
 
 export interface TimeTableViewProps {
 	table: TimeTable;
-	columns?: TimeTableColumn[];
 }
 
 function infoMessageCombine(info: string, message: string) {
@@ -84,8 +63,7 @@ function infoMessageCombine(info: string, message: string) {
 
 const htmlParser = new HTMLParser();
 
-const TimeTableView: React.FC<TimeTableViewProps> = ({ table, columns = DEFAULT_COLUMNS}) => {
-	const completeColumns = [TimeTableColumn.CLASS, ...columns];
+const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 	const entryFields: TimeTableViewEntryFields[] = [];
 	const classes = useStyles();
 	const theme = useTheme();
@@ -95,7 +73,11 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table, columns = DEFAULT_
 		(schoolClass) => {
 			entryFields.push({
 				class: schoolClass,
-				...entry
+				lesson: entry.lesson,
+				subject: entry.subject,
+				teacher: entry.teacher,
+				rooms: entry.rooms,
+				info: infoMessageCombine(entry.info, entry.message),
 			})
 		}
 	));
@@ -117,8 +99,8 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table, columns = DEFAULT_
 				))}
 			</List>
 			{useColumnView 
-				? <TimeTableMobileView data={entryFields} columns={completeColumns} />
-				: <TimeTableDesktopView data={entryFields} columns={completeColumns} />
+				? <TimeTableMobileView data={entryFields} />
+				: <TimeTableDesktopView data={entryFields} />
 			}
 		</Container>
 	)
@@ -126,7 +108,6 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table, columns = DEFAULT_
 
 export {
 	COLUMN_TITLES,
-	infoMessageCombine
 }
 
 export default TimeTableView;

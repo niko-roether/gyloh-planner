@@ -1,8 +1,8 @@
-import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useMediaQuery, useTheme } from "@material-ui/core";
+import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import SubstitutionView from "./substitution_view";
-import { COLUMN_TITLES, infoMessageCombine, TimeTableColumn, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
+import { COLUMN_TITLES, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	tableContainer: {
@@ -27,62 +27,35 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const TimeTableDesktopViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields, columns, className }) => {
+const TimeTableDesktopViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields }) => {
 	const classes = useStyles();
-	const theme = useTheme();
-	const shortNames = useMediaQuery(theme.breakpoints.down("md"));
-	const shorterNames = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
-		<TableRow className={className}>
-			{columns.map((column, i) => (
-				<TableCell key={i} className={classes.cell}>
-					{(() => {
-						switch(column) {
-							case TimeTableColumn.CLASS: return shorterNames ? fields.class.shortName : fields.class.longName;
-							case TimeTableColumn.LESSON: return fields.lesson;
-							case TimeTableColumn.TIME: return fields.time;
-							case TimeTableColumn.SUBJECT: return shorterNames ? fields.subject.shortName : fields.subject.longName;
-							case TimeTableColumn.TEACHER:
-								return (
-									<SubstitutionView 
-										value={fields.teacher}
-										current={c => c}
-										subst={s => s}
-									/>
-								);
-							case TimeTableColumn.ROOM:
-								return  fields.rooms.map((room, i) => (
-									<SubstitutionView 
-										key={i} value={room}
-										current={c => (shortNames ? c?.shortName : c?.longName)}
-										subst={s => (shortNames ? s?.shortName : s?.longName)}
-									/>
-								));
-							case TimeTableColumn.INFO: return fields.info;
-							case TimeTableColumn.MESSAGE: return fields.message;
-							case TimeTableColumn.INFO_MESSAGE_COMBINE: return infoMessageCombine(fields.info, fields.message);
-						}
-					})()}
-				</TableCell>
-			))}
+		<TableRow className={classes.row}>
+			<TableCell>{fields.class.longName}</TableCell>
+			<TableCell>{fields.lesson}</TableCell>
+			<TableCell>{fields.subject.longName}</TableCell>
+			<TableCell><SubstitutionView value={fields.teacher} current={c => c} subst={s => s} /></TableCell>
+			<TableCell>
+				{fields.rooms.map((room, i) => (
+					<SubstitutionView key={i} value={room} current={c => c?.longName} subst={s => s?.longName} />
+				))}
+			</TableCell>
+			<TableCell>{fields.info}</TableCell>
 		</TableRow>
 	)
 }
 
 export interface TimeTableTableViewProps {
 	table: TimeTable;
-	columns?: TimeTableColumn[]
 }
 
-const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data, columns }) => {
+const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	const classes = useStyles();
 
 	const entries = data.map((ef, i) => (
 		<TimeTableDesktopViewEntry 
 		fields={ef}
-		columns={columns}
 		key={i}
-		className={classes.row}
 	/>
 	))
 
@@ -91,11 +64,12 @@ const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data, columns }
 			<Table stickyHeader>
 				<TableHead>
 					<TableRow>
-						{columns.map((column, i) => (
-							<TableCell key={i} className={classes.tableHeaderCell}>
-								{COLUMN_TITLES.get(column)}
-							</TableCell>
-						))}
+						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.class}</TableCell>
+						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.lesson}</TableCell>
+						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.subject}</TableCell>
+						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.teacher}</TableCell>
+						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.room}</TableCell>
+						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.info}</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
