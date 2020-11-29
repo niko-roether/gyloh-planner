@@ -1,5 +1,5 @@
 import { Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, SwipeableDrawer } from "@material-ui/core";
-import { CalendarToday as CalendarTodayIcon, Close as CloseIcon, Code as CodeIcon, Menu as MenuIcon } from "@material-ui/icons";
+import { CalendarToday as CalendarTodayIcon, Close as CloseIcon, Code as CodeIcon, Feedback as FeedbackIcon, Info as InfoIcon, Menu as MenuIcon } from "@material-ui/icons";
 import React from "react";
 import Link from "next/link";
 
@@ -19,9 +19,20 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+const NAV_STATE_SESSION_KEY = "page-nav-state";
+
 const PageNav: React.FC = () => {
 	const classes = useStyles();
-	const [open, setOpen] = React.useState<boolean>(false);
+	const [open, setOpen] = React.useState<boolean>(Boolean(sessionStorage.getItem(NAV_STATE_SESSION_KEY)));
+	const onOpen = () => {
+		setOpen(true);
+		sessionStorage.setItem(NAV_STATE_SESSION_KEY, "open");
+	}
+	const onClose = () => {
+		setOpen(false);
+		sessionStorage.setItem(NAV_STATE_SESSION_KEY, "");
+	}
+
 	return (
 		<React.Fragment>
 			<IconButton edge="start" color="inherit" className={classes.menuButton} onClick={() => setOpen(true)}>
@@ -30,25 +41,37 @@ const PageNav: React.FC = () => {
 			<SwipeableDrawer
 				anchor="left"
 				open={open}
-				onOpen={() => setOpen(true)}
-				onClose={() => setOpen(false)}
+				onOpen={onOpen}
+				onClose={onClose}
 			>
 				<aside className={classes.drawerContent}>
 					<div className={classes.toolbar}>
-						<IconButton onClick={() => setOpen(false)}>
+						<IconButton onClick={onClose}>
 							<CloseIcon />
 						</IconButton>
 					</div>
 					<Divider />
 					<List>
 						<Link href="/">
-							<ListItem button onClick={() => setOpen(false)}>
+							<ListItem button>
 								<ListItemIcon><CalendarTodayIcon /></ListItemIcon>
 								<ListItemText>Vertretungsplan</ListItemText>
 							</ListItem>
 						</Link>
+						<Link href="/about">
+							<ListItem button>
+								<ListItemIcon><InfoIcon /></ListItemIcon>
+								<ListItemText>Was Ist Das Hier?</ListItemText>
+							</ListItem>
+						</Link>
+						<Link href="/feedback">
+							<ListItem button>
+								<ListItemIcon><FeedbackIcon /></ListItemIcon>
+								<ListItemText>Feedback</ListItemText>
+							</ListItem>
+						</Link>
 						<Link href="/api-reference">
-							<ListItem button onClick={() => setOpen(false)}>
+							<ListItem button>
 								<ListItemIcon><CodeIcon /></ListItemIcon>
 								<ListItemText>API-Referenz</ListItemText>
 							</ListItem>
