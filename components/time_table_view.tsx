@@ -8,7 +8,7 @@ import { Parser as HTMLParser } from "html-to-react";
  
 const useStyles = makeStyles(theme => ({
 	container: {
-		marginTop: theme.spacing(3),
+		marginTop: theme.spacing(6),
 		paddingBottom: theme.spacing(12),
 		[theme.breakpoints.down("sm")]: {
 			paddingLeft: 0,
