@@ -25,11 +25,8 @@ const useStyles = makeStyles(theme => ({
 		display: "inline-flex",
 		justifyContent: "space-between"
 	},
-	buttonWrapper: {
-		flex: 1,
-		display: "flex",
-		justifyContent: "flex-end",
-		alignItems: "center"
+	accordionSummary: {
+		overflowX: "hidden",
 	}
 }))
 
@@ -39,7 +36,7 @@ const TimeTableMobileViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields })
 
 	return (
 		<Accordion>
-			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+			<AccordionSummary className={classes.accordionSummary} expandIcon={<ExpandMoreIcon />}>
 				<div className={classes.textWrapper}>
 					<Typography variant="subtitle1">{fields.class.longName}</Typography>
 					<span className={classes.subTextWrapper}>
