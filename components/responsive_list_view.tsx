@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, IconButton, Paper, Tab, Tabs, useMediaQuery, useTheme } from "@material-ui/core";
+import { Box, Button, ButtonGroup, Hidden, IconButton, Paper, Tab, Tabs, useMediaQuery, useTheme } from "@material-ui/core";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 import React from "react";
@@ -37,9 +37,11 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 					))}
 				</Tabs>
 			</Paper>
-			<div>
-				{elements[mobileIndex]}
-			</div>
+			{elements.map((e, i) => (
+				<div key={i} style={{display: i === mobileIndex ? "block" : "none"}}>
+					{e}
+				</div>
+			))}
 		</Component>
 	)
 }
