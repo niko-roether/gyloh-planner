@@ -11,7 +11,7 @@ const Home: React.FC = () => {
     <Page title="Dashboard">
       <PromiseBuilder promise={getCurrentTables(3)}>
         {tables => tables && 
-          <ResponsiveListView>
+          <ResponsiveListView titles={tables.map(table => table.date.toLocaleDateString("de-DE"))}>
             {tables.map((table, i) => <TimeTableView table={table} key={i} />)}
           </ResponsiveListView>
         }
