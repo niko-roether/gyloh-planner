@@ -1,7 +1,22 @@
-import { Box, Button, ButtonGroup, Hidden, IconButton, Paper, Tab, Tabs, useMediaQuery, useTheme } from "@material-ui/core";
+import { Button, makeStyles, MobileStepper, Paper, Step, StepButton, Stepper, useMediaQuery, useTheme } from "@material-ui/core";
 import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
-import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
+import { CalendarToday, KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import React from "react";
+
+const useStyles = makeStyles({
+	stepper: {
+		flex: 4
+	},
+	controls: {
+		display: "flex",
+		margin: "auto"
+	},
+	buttonContainer: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center"
+	}
+})
 
 export interface ResponsiveListViewProps<P> {
 	component?: React.ElementType<P>;
@@ -13,32 +28,67 @@ export interface ResponsiveListViewProps<P> {
 const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component = "div", breakpoint = "sm", children, componentProps, titles}) => {
 	const theme = useTheme();
 	const mobileView = useMediaQuery(theme.breakpoints.down(breakpoint));
-	const [mobileIndex, setMobileIndex] = React.useState<number>(0);
+	const [index, setIndex] = React.useState<number>(0);
+	const classes = useStyles();
 
 	const Component = component;
 
-	if(!mobileView) return <Component {...componentProps}>{children}</Component>;
-
 	const elements = React.Children.toArray(children);
-
 	
-	const onTabChange = (event: React.ChangeEvent<{}>, newTab: number) => setMobileIndex(newTab);
+	const toNext = () => setIndex(prev => ++prev);
+	const toPrev = () => setIndex(prev => --prev);
 
 	return (
 		<Component {...componentProps}>
 			<Paper square>
-				<Tabs
-					value={mobileIndex}
-					onChange={onTabChange}
-					variant="fullWidth"
-				>
-					{elements.map((e, i) => (
-						<Tab key={i} label={titles ? titles[i] || i : i} />
-					))}
-				</Tabs>
+				{mobileView
+					? (
+						<MobileStepper 
+							variant="text"
+							activeStep={index}
+							steps={elements.length}
+							nextButton={
+								<Button size="small" onClick={toNext} disabled={index === elements.length - 1}>
+								Next
+								{theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+								</Button>
+							}
+							backButton={
+								<Button size="small" onClick={toPrev} disabled={index === 0}>
+								{theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+								Back
+								</Button>
+							}
+						/>
+					) : (
+						<nav className={classes.controls}  style={{maxWidth: 300 * elements.length}}>
+							<div className={classes.buttonContainer}>
+								<Button variant="contained" color="primary" onClick={toPrev} disabled={index === 0}>
+									{theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+									Back
+								</Button>
+							</div>
+							<Stepper className={classes.stepper} activeStep={index} alternativeLabel nonLinear>
+								{elements.map((_, i) => (
+									<Step key={i}>
+										<StepButton onClick={() => setIndex(i)} icon={<CalendarToday color={index === i ? "inherit" : "action"} />}>
+											{titles ? titles[i] : i}
+										</StepButton>
+									</Step>
+								))}
+							</Stepper>
+							<div className={classes.buttonContainer}>
+								<Button variant="contained" color="primary" onClick={toNext} disabled={index === elements.length - 1}>
+									Next
+									{theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+								</Button>
+							</div>
+						</nav>
+					)
+				}
 			</Paper>
 			{elements.map((e, i) => (
-				<div key={i} style={{display: i === mobileIndex ? "block" : "none"}}>
+				<div key={i} style={{display: i === index ? "block" : "none"}}>
 					{e}
 				</div>
 			))}
