@@ -27,7 +27,7 @@ const About: React.FC = () => {
 				<Typography paragraph>
 					Falls du Fragen, Probleme oder Verbesserungsvorschläge hast, wende dich bitte an <a href="mailto:nicholas.roether@t-online.de">
 					nicholas.roether@t-online.de </a> oder <a href="https://github.com/nicholas-roether/gyloh-planner/issues/new">
-					poste ein Issue auf meinem Github.</a>
+					poste ein Issue auf meinem GitHub.</a>
 				</Typography>
 			</Container>
 		</Page>
