@@ -1,7 +1,7 @@
 import { TimeTable } from "gyloh-webuntis-api";
-import { server } from "../config";
+import { SERVER } from "../config";
 
-const API_BASE = server + "/api/tables"
+const API_BASE = SERVER + "/api/tables"
 
 function parseTable(data: any): TimeTable {
 	return new TimeTable({

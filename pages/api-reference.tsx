@@ -5,7 +5,7 @@ import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Heading from "../src/components/heading";
 import Page from "../src/components/page";
-import { server } from "../src/config";
+import { SERVER } from "../src/config";
 
 const useStyles = makeStyles(theme => ({
 	example: {
@@ -39,7 +39,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 
 				<Heading variant="h4" id="current-tables">Aktuelle Vertretungspläne</Heading>
 				<Typography paragraph>
-					Aktuelle Pläne können unter <code>{server}/api/tables/current?num=[num]</code> gefunden werden, wobei <code>[num]</code>
+					Aktuelle Pläne können unter <code>{SERVER}/api/tables/current?num=[num]</code> gefunden werden, wobei <code>[num]</code>
 					die Anzahl an Plänen ist, die abgerufen werden sollen, anfangend mit dem nächsten Schultag. Die Ergebnisse werden in
 					form
 				</Typography>
@@ -49,7 +49,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 
 				<Heading variant="h4" id="specific-tables">Bestimmte Vertretungspläne</Heading>
 				<Typography paragraph>
-					Bestimmte Vertretungspläne können unter <code>{server}/api/tables/get?date=[date]</code> gefunden werden, 
+					Bestimmte Vertretungspläne können unter <code>{SERVER}/api/tables/get?date=[date]</code> gefunden werden, 
 					wobei <code>[date]</code> das entsprechende Datum ist. Ich empfehle als Format einen Timestamp in Form der Anzahl an 
 					Millisekunden seit dem 1.1.1970 00:00:00 UTC zu verwenden, da diese auch für die Rückgabe verwendet werden, aber es kann auch
 					ein <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601-Formatiertes Datum</a> (YYYY-MM-DD) oder 
