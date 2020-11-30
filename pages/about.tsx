@@ -21,8 +21,8 @@ const About: React.FC = () => {
 					sind komplett Open-Source und auf meinem <a href="https://github.com/nicholas-roether/">GitHub</a> zu finden.
 				</Typography>
 				<Typography paragraph>
-					Zusätzlich stellt die Website eine rudimentäre <Link href="/api-reference">API</Link> 
-					zur Verfügung, mit der ihr hoffentlich euren Spaß haben werdet ;)
+					Zusätzlich stellt die Website eine rudimentäre <Link href="/api-reference">API</Link> zur 
+					Verfügung, mit der ihr hoffentlich euren Spaß haben werdet ;)
 				</Typography>
 				<Typography paragraph>
 					Falls du Fragen, Probleme oder Verbesserungsvorschläge hast, wende dich bitte an <a href="mailto:nicholas.roether@t-online.de">
