@@ -52,14 +52,14 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 						className={classes.mobileStepper}
 						nextButton={
 							<Button size="small" onClick={toNext} disabled={index === elements.length - 1}>
-							Next
+							Weiter
 							{theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
 							</Button>
 						}
 						backButton={
 							<Button size="small" onClick={toPrev} disabled={index === 0}>
 							{theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-							Back
+							Zurück
 							</Button>
 						}
 					/>
@@ -69,7 +69,7 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 						<div className={classes.buttonContainer}>
 							<Button variant="contained" color="primary" onClick={toPrev} disabled={index === 0}>
 								{theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-								Back
+								Zurück
 							</Button>
 						</div>
 						<Stepper className={classes.stepper} activeStep={index} alternativeLabel nonLinear>
@@ -83,7 +83,7 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 						</Stepper>
 						<div className={classes.buttonContainer}>
 							<Button variant="contained" color="primary" onClick={toNext} disabled={index === elements.length - 1}>
-								Next
+								Weiter
 								{theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
 							</Button>
 						</div>
