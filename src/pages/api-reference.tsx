@@ -57,7 +57,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				</Typography>
 				<Typography paragraph>
 					Hierbei muss natürlich angemerkt werden, dass die Möglichkeit besteht, dass für einen bestimmten Tag kein Plan existiert.
-					In diesem Fall gibt die API ein leeres Objekt zurück.
+					In diesem Fall gibt die API null zurück.
 				</Typography>
 				<Typography paragraph>
 					Im Allgemeinen erfolgt die Ausgabe in entweder einem leeren Objekt, oder einem Vertretungsplan 
