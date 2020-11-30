@@ -19,19 +19,9 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const NAV_STATE_SESSION_KEY = "page-nav-state";
-
 const PageNav: React.FC = () => {
 	const classes = useStyles();
-	const [open, setOpen] = React.useState<boolean>(Boolean(sessionStorage.getItem(NAV_STATE_SESSION_KEY)));
-	const onOpen = () => {
-		setOpen(true);
-		sessionStorage.setItem(NAV_STATE_SESSION_KEY, "open");
-	}
-	const onClose = () => {
-		setOpen(false);
-		sessionStorage.setItem(NAV_STATE_SESSION_KEY, "");
-	}
+	const [open, setOpen] = React.useState<boolean>(false);
 
 	return (
 		<React.Fragment>
@@ -41,12 +31,12 @@ const PageNav: React.FC = () => {
 			<SwipeableDrawer
 				anchor="left"
 				open={open}
-				onOpen={onOpen}
-				onClose={onClose}
+				onOpen={() => setOpen(true)}
+				onClose={() => setOpen(false)}
 			>
 				<aside className={classes.drawerContent}>
 					<div className={classes.toolbar}>
-						<IconButton onClick={onClose}>
+						<IconButton onClick={() => setOpen(false)}>
 							<CloseIcon />
 						</IconButton>
 					</div>
@@ -62,12 +52,6 @@ const PageNav: React.FC = () => {
 							<ListItem button>
 								<ListItemIcon><InfoIcon /></ListItemIcon>
 								<ListItemText>Was Ist Das Hier?</ListItemText>
-							</ListItem>
-						</Link>
-						<Link href="/feedback">
-							<ListItem button>
-								<ListItemIcon><FeedbackIcon /></ListItemIcon>
-								<ListItemText>Feedback</ListItemText>
 							</ListItem>
 						</Link>
 						<Link href="/api-reference">
