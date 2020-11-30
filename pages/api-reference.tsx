@@ -3,9 +3,9 @@ import { GylohWebUntis } from "gyloh-webuntis-api";
 import { GetStaticProps } from "next";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import Heading from "../components/heading";
-import Page from "../components/page";
-import { server } from "../config";
+import Heading from "../src/components/heading";
+import Page from "../src/components/page";
+import { server } from "../src/config";
 
 const useStyles = makeStyles(theme => ({
 	example: {

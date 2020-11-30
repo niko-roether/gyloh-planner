@@ -1,8 +1,8 @@
 import React from "react";
-import Page from "../components/page";
-import { getCurrentTables } from "../api_consume/consume_table";
-import TimeTableView from "../components/time_table_view";
-import ResponsiveListView from "../components/responsive_list_view";
+import Page from "../src/components/page";
+import { getCurrentTables } from "../src/api_consume/consume_table";
+import TimeTableView from "../src/components/time_table_view";
+import ResponsiveListView from "../src/components/responsive_list_view";
 import { Box, CircularProgress, Container } from "@material-ui/core";
 import useSWR from "swr";
 

@@ -1,7 +1,7 @@
 import { Container, Link, Typography } from "@material-ui/core";
 import React from "react";
-import Heading from "../components/heading";
-import Page from "../components/page";
+import Heading from "../src/components/heading";
+import Page from "../src/components/page";
 
 const About: React.FC = () => {
 	return (
