@@ -34,8 +34,7 @@ const COLUMN_TITLES = {
 	info: "Info",
 }
 
-export interface TimeTableViewEntryFields {
-	class: Class,
+export interface TimeTableEntryFields {
 	lesson: string,
 	subject: Subject,
 	teacher: string | Substitution<string>,
@@ -43,12 +42,17 @@ export interface TimeTableViewEntryFields {
 	info: string
 }
 
+export interface TimeTableEntryFieldsForClass {
+	class: Class,
+	fields: TimeTableEntryFields[]
+}
+
 export interface TimeTableViewEntryProps {
-	fields: TimeTableViewEntryFields;
+	fieldsForClass: TimeTableEntryFieldsForClass;
 }
 
 export interface TimeTableSubViewProps {
-	data: TimeTableViewEntryFields[];
+	data: TimeTableEntryFieldsForClass[];
 }
 
 export interface TimeTableViewProps {
@@ -77,23 +81,29 @@ const ResponsiveTimeTableView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 }
 
 const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
-	const entryFields: TimeTableViewEntryFields[] = [];
+	const entryFields: TimeTableEntryFieldsForClass[] = [];
 	const classes = useStyles();
 	
-	table.entries.forEach((entry) => entry.classes.forEach(
-		(schoolClass) => {
+	table.affectedClasses.forEach(
+		affectedClass => {
 			entryFields.push({
-				class: schoolClass,
-				lesson: entry.lesson,
-				subject: entry.subject,
-				teacher: entry.teacher,
-				rooms: entry.rooms,
-				info: infoMessageCombine(entry.info, entry.message),
-			})
+				class: affectedClass,
+				fields: table.entries
+					.filter(entry => entry.classes.some(cls => cls.shortName === affectedClass.shortName))
+					.map(entry => ({
+						lesson: entry.lesson,
+						subject: entry.subject,
+						teacher: entry.teacher,
+						rooms: entry.rooms,
+						info: infoMessageCombine(entry.info, entry.message)
+					}))
+			});
 		}
-	));
+	);
 
-	entryFields.sort((a, b) => a.class.shortName.localeCompare(b.class.shortName, "de-DE", {numeric: true}))
+	console.log(entryFields);
+
+	entryFields.sort((a, b) => a.class.shortName.localeCompare(b.class.shortName, "de-DE", {numeric: true}));
 
 	return (
 		<Container className={classes.container}>
