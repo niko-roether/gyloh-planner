@@ -15,9 +15,11 @@ async function getCurrentTables(num: number): Promise<TimeTable[] | null> {
 		if(res.status != 200) return null;
 		return res.json()
 	});
-	if(res.error) throw new Error(res.error);
+	const notFoundError = new Error("Table not found");
+	if(!res) throw notFoundError;
+	if(res.error) throw res.error;
 	const data = res.data;
-	if(data == null) return null;
+	if(data == null) throw notFoundError;
 	return data.map((d: any) => parseTable(d));
 }
 
