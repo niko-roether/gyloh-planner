@@ -21,8 +21,9 @@ const handler: NextApiHandler = async (req, res) => {
 	if(!requireMethods(req, res, legalMethods)) return;
 	const dateStr = requireQueryArg(req, res, "date");
 	if(!dateStr) return;
-	const date = new Date(dateStr);
-	if(!date) return res.status(400).end(apiError("Argument 'date' is of invalid format"));
+	const dateNum = Number.parseInt(dateStr);
+	const date = new Date(dateNum || dateStr);
+	if(!date || isNaN(date.getTime())) return res.status(400).end(apiError("Argument 'date' is of invalid format"));
 
 	const table = await GylohWebUntis.getTable(date);
 	if(!table) return res.status(200).end(apiResponse(null));
