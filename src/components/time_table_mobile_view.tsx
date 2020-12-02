@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Card, Dialog, Divider, IconButton, List, ListItem, ListItemText, makeStyles, Slide, Table, TableBody, TableCell, TableContainer, TableRow, Toolbar, Typography } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Backdrop, Box, Card, Dialog, Divider, IconButton, List, ListItem, ListItemText, makeStyles, Slide, Table, TableBody, TableCell, TableContainer, TableRow, Toolbar, Typography, useTheme } from "@material-ui/core";
 import { TransitionProps } from "@material-ui/core/transitions/transition";
 import { ArrowBack as ArrowBackIcon, Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import { Class } from "gyloh-webuntis-api";
@@ -73,6 +73,7 @@ interface ClassPopupProps {
 
 const ClassPopup: React.FC<ClassPopupProps> = ({ data, open, onClose }) => {
 	const classes = useStyles();
+	const theme = useTheme();
 
 	const Transition = React.forwardRef((
 		props: TransitionProps & { children?: React.ReactElement },
@@ -82,7 +83,7 @@ const ClassPopup: React.FC<ClassPopupProps> = ({ data, open, onClose }) => {
 	));
 
 	return (
-		<Dialog fullScreen open={open} TransitionComponent={Transition} onClose={onClose}>
+		<Dialog fullScreen open={open} TransitionComponent={Transition} onClose={onClose} PaperProps={{style: {backgroundColor: theme.palette.background.default}}}>
 			<AppBar position="static">
 				<Toolbar>
 					<IconButton edge="start" onClick={onClose} color="inherit"><CloseIcon /></IconButton>
@@ -100,7 +101,6 @@ const ClassPopup: React.FC<ClassPopupProps> = ({ data, open, onClose }) => {
 }
 
 const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
-	const classes = useStyles();
 	const [currentClass, setCurrentClass] = React.useState<string | null>(null);
 
 	const goToClass = (newClass: string) => {

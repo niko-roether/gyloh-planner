@@ -1,10 +1,13 @@
-import { Container, makeStyles, Typography } from "@material-ui/core";
+import { Container, Link, makeStyles, Typography } from "@material-ui/core";
 import { GylohWebUntis } from "gyloh-webuntis-api";
 import { GetStaticProps } from "next";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import dark from "react-syntax-highlighter/dist/esm/styles/hljs/dark";
+import light from "react-syntax-highlighter/dist/esm/styles/hljs/lightfair";
 import Heading from "../src/components/heading";
 import Page from "../src/components/page";
+import { ThemeContext } from "../src/components/theme_manager";
 import { SERVER } from "../src/config";
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +24,9 @@ interface ApiReferenceProps {
 
 const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => {
 	const classes = useStyles();
+	const { themeName } = React.useContext(ThemeContext);
+
+	const syntaxTheme = themeName == "light" ? light : dark;
 
 	return (
 		<Page title="API-Referenz">
@@ -28,13 +34,13 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Heading variant="h3" id="api-reference">API-Referenz</Heading>
 				<Typography paragraph>
 					Dieser Server stellt eine rudimentäre REST API zur Verfügung. Sie erlaubt, die Vertretungsplandaten entweder 
-					eine bestimmte Anzahl an <a href="#current-tables">aktuellen Plänen</a> (d. h. entweder von Heute, oder von 
+					eine bestimmte Anzahl an <Link href="#current-tables" color="secondary">aktuellen Plänen</Link> (d. h. entweder von Heute, oder von 
 					nächsten Schultag an bis zu einer beliebingen Anzahl in die Zukunft), oder den Plan für 
-					einen <a href="#specific-tables">bestimmten Tag</a>, falls er existiert, abzurufen.
+					einen <Link href="#specific-tables" color="secondary">bestimmten Tag</Link>, falls er existiert, abzurufen.
 				</Typography>
 				<Typography paragraph>
-					Für eine Erklärung des Ausgabeformats siehe <a href="#output-format">Ausgabeformat</a>, und
-					für ein Beispiel siehe <a href="#example">Beispiel</a>.
+					Für eine Erklärung des Ausgabeformats siehe <Link href="#output-format" color="secondary">Ausgabeformat</Link>, und
+					für ein Beispiel siehe <Link href="#example" color="secondary">Beispiel</Link>.
 				</Typography>
 
 				<Heading variant="h4" id="current-tables">Aktuelle Vertretungspläne</Heading>
@@ -44,7 +50,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					form
 				</Typography>
 				<Typography paragraph>
-					Die Ergebnisse werden in Form eines Arrays an Vertretungsplänen ausgegeben (Siehe <a href="#output-format">Ausgabeformat</a>).
+					Die Ergebnisse werden in Form eines Arrays an Vertretungsplänen ausgegeben (Siehe <Link href="#output-format" color="secondary">Ausgabeformat</Link>).
 				</Typography>
 
 				<Heading variant="h4" id="specific-tables">Bestimmte Vertretungspläne</Heading>
@@ -52,8 +58,8 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					Bestimmte Vertretungspläne können unter <code>{SERVER}/api/tables/get?date=[date]</code> gefunden werden, 
 					wobei <code>[date]</code> das entsprechende Datum ist. Ich empfehle als Format einen Timestamp in Form der Anzahl an 
 					Millisekunden seit dem 1.1.1970 00:00:00 UTC zu verwenden, da diese auch für die Rückgabe verwendet werden, aber es kann auch
-					ein <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601-Formatiertes Datum</a> (YYYY-MM-DD) oder 
-					ein <a href="https://tools.ietf.org/html/rfc2822#section-3.3">IETF-konformer Timestamp nach RFC 2822</a> verwendet werden.
+					ein <Link href="https://www.iso.org/iso-8601-date-and-time-format.html" color="secondary">ISO 8601-Formatiertes Datum</Link> (YYYY-MM-DD) oder 
+					ein <Link href="https://tools.ietf.org/html/rfc2822#section-3.3" color="secondary">IETF-konformer Timestamp nach RFC 2822</Link> verwendet werden.
 				</Typography>
 				<Typography paragraph>
 					Hierbei muss natürlich angemerkt werden, dass die Möglichkeit besteht, dass für einen bestimmten Tag kein Plan existiert.
@@ -61,7 +67,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				</Typography>
 				<Typography paragraph>
 					Im Allgemeinen erfolgt die Ausgabe in entweder einem leeren Objekt, oder einem Vertretungsplan 
-					(Siehe <a href="#output-format">Ausgabeformat</a>).
+					(Siehe <Link href="#output-format" color="secondary">Ausgabeformat</Link>).
 				</Typography>
 
 				<Heading variant="h4" id="output-format">Ausgabeformat</Heading>
@@ -73,7 +79,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Typography paragraph>
 					Das allgemeine Ausgabeformat, dem alle Antworten dieser API folgen, hat folgendes Format:
 				</Typography>
-				<SyntaxHighlighter language="json">
+				<SyntaxHighlighter language="json" style={syntaxTheme}>
 					{
 						'{\n' +
 						'   "data": ...,\n' +
@@ -97,7 +103,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					{/* TODO update this if necessary */}
 					Alle Ausgaben dieser API beinhalten Vertretungspläne. Diese haben das folgende Format:
 				</Typography>
-				<SyntaxHighlighter language="json">
+				<SyntaxHighlighter language="json" style={syntaxTheme}>
 					{
 						'{\n' +
 						'   // Ein timestamp in Form der Millisekunden seit dem 1.1.1970, 00:00:00 UTC.\n' +
@@ -183,7 +189,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Typography paragraph>
 					Das Format sieht folgendermaßen aus:
 				</Typography>
-				<SyntaxHighlighter language="json">
+				<SyntaxHighlighter language="json" style={syntaxTheme}>
 					{
 						'{\n' +
 						'   "current": ...,\n' +
@@ -208,7 +214,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Typography paragraph>
 					Dies ist ein Beispieloutput für das Abrufen eines aktuellen Vertretungsplans am {new Date(exampleDate).toLocaleDateString("de-DE")}.
 				</Typography>
-				<SyntaxHighlighter language="json" className={classes.example}>{example}</SyntaxHighlighter>
+				<SyntaxHighlighter language="json" className={classes.example} style={syntaxTheme}>{example}</SyntaxHighlighter>
 			</Container>
 		</Page>
 	)

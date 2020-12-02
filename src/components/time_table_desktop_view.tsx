@@ -11,19 +11,18 @@ const useStyles = makeStyles(theme => ({
 	},
 	tableHeaderCell: {
 		fontWeight: "bold",
-		background: theme.palette.grey[900],
-		color: "#fff"
-	},
-	row: {
-		"&:nth-child(odd)": {
-			background: theme.palette.grey[100],
-		}	
+		background: theme.palette.common.black,
+		color: theme.palette.common.white
 	},
 	firstCell: {
 		fontWeight: "bold",
-		background: theme.palette.grey[600],
-		color: "#fff"
-	}
+		background: theme.palette.grey[theme.palette.type == "light" ? 200 : 900]
+	},
+	row: {
+		"&:nth-child(odd)": {
+			background: theme.palette.action.hover
+		}	
+	},
 }));
 
 
