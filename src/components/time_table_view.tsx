@@ -5,6 +5,7 @@ import TimeTableMobileView from "./time_table_mobile_view";
 import TimeTableDesktopView from "./time_table_desktop_view";
 import { Info as InfoIcon } from "@material-ui/icons";
 import { Parser as HTMLParser } from "html-to-react";
+import SubstitutionView from "./substitution_view";
  
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -35,12 +36,12 @@ const COLUMN_TITLES = {
 }
 
 export interface TimeTableViewEntryFields {
-	class: Class,
+	class: string,
 	lesson: string,
-	subject: Subject,
-	teacher: string | Substitution<string>,
-	rooms: (Room | Substitution<Room>)[],
-	info: string
+	subject: string,
+	teacher: React.ReactNode
+	room: React.ReactNode
+	info: React.ReactNode
 }
 
 export interface TimeTableViewEntryProps {
@@ -83,17 +84,26 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 	table.entries.forEach((entry) => entry.classes.forEach(
 		(schoolClass) => {
 			entryFields.push({
-				class: schoolClass,
+				class: schoolClass.longName,
 				lesson: entry.lesson,
-				subject: entry.subject,
-				teacher: entry.teacher,
-				rooms: entry.rooms,
+				subject: entry.subject.longName,
+				teacher: <SubstitutionView value={entry.teacher} current={c => c} subst={p => p} />,
+				room: (
+					<span>
+						{entry.rooms.map((room, i) => (
+							<React.Fragment>
+								<SubstitutionView value={room} current={c => c?.longName} subst={s => s?.longName} />
+								{i !== entry.rooms.length - 1 && <span>, </span>}
+							</React.Fragment>
+						))}
+					</span>
+				),
 				info: infoMessageCombine(entry.info, entry.message),
 			})
 		}
 	));
 
-	entryFields.sort((a, b) => a.class.shortName.localeCompare(b.class.shortName, "de-DE", {numeric: true}))
+	entryFields.sort((a, b) => a.class.localeCompare(b.class, "de-DE", {numeric: true}));
 
 	return (
 		<Container className={classes.container}>
