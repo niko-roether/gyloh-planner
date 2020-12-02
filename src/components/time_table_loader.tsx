@@ -9,7 +9,7 @@ interface TimeTableLoaderProps {
 }
 
 const TimeTableLoader: React.FC<TimeTableLoaderProps> = ({ date }) => {
-	if(!(date instanceof Date)) date = new  Date(date);
+	if(!(date instanceof Date)) date = new Date(date);
 	const res = useSWR(`table-${date.toISOString().split("T")[0]}`, () => getTable(date));
 	if(res.error) return <Box textAlign="center" mt={4}>Fehler beim Laden: {res.error}</Box>
 	if(!res.data) return <Box textAlign="center" mt={4}><CircularProgress /></Box>
