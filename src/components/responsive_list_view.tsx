@@ -75,7 +75,7 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 						<Stepper className={classes.stepper} activeStep={index} alternativeLabel nonLinear>
 							{elements.map((_, i) => (
 								<Step key={i}>
-									<StepButton onClick={() => setIndex(i)} icon={<IconComponent color={index === i ? "inherit" : "action"} />}>
+									<StepButton onClick={() => setIndex(i)} icon={<IconComponent color={index === i ? "inherit" : "disabled"} />}>
 										{titles ? titles[i] : i + 1}
 									</StepButton>
 								</Step>
