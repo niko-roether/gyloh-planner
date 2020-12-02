@@ -56,9 +56,6 @@ export interface TimeTableSubViewProps {
 	data: TimeTableEntryFieldsForClass[];
 }
 
-export interface TimeTableViewProps {
-	table: TimeTable;
-}
 
 function infoMessageCombine(info: string, message: string) {
 	if(info !== "" && message !== "") return `${info}; ${message}`;
@@ -81,6 +78,10 @@ const ResponsiveTimeTableView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	)
 }
 
+export interface TimeTableViewProps {
+	table: TimeTable;
+}
+
 const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 	const entryFields: TimeTableEntryFieldsForClass[] = [];
 	const classes = useStyles();
@@ -91,14 +92,14 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 				class: affectedClass.longName,
 				fields: table.entries
 					.filter(entry => entry.classes.some(cls => cls.shortName === affectedClass.shortName))
-					.map(entry => ({
+					.map((entry, i) => ({
 						lesson: entry.lesson,
 						subject: entry.subject.longName,
-						teacher: <SubstitutionView value={entry.teacher} current={c => c} subst={p => p} />,
+						teacher: <SubstitutionView value={entry.teacher} current={c => c} subst={p => p} key={i} />,
 						room: (
 							<span>
 								{entry.rooms.map((room, i) => (
-									<React.Fragment>
+									<React.Fragment key={i}>
 										<SubstitutionView value={room} current={c => c?.longName} subst={s => s?.longName} />
 										{i !== entry.rooms.length - 1 && <span>, </span>}
 									</React.Fragment>
@@ -110,8 +111,6 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 			});
 		}
 	);
-
-	console.log(entryFields);
 
 	entryFields.sort((a, b) => a.class.localeCompare(b.class, "de-DE", {numeric: true}));
 
