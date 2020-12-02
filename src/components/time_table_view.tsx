@@ -117,7 +117,9 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 	return (
 		<Container className={classes.container}>
 			<div className={classes.headingContainer}>
-				<Typography variant="h4">Vertretungsplan {table.date.toLocaleDateString("de-De")}</Typography>
+				<Typography variant="h4">
+					Vertretungsplan {table.date.toLocaleDateString("de-De", {weekday: "short", day: "numeric", month: "numeric", year: "numeric"})}
+				</Typography>
 				<Typography variant="subtitle1">Stand {table.lastUpdate}</Typography>
 			</div>
 			<List>
