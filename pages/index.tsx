@@ -5,33 +5,39 @@ import TimeTableView from "../src/components/time_table_view";
 import ResponsiveListView from "../src/components/responsive_list_view";
 import { Box, CircularProgress, Container } from "@material-ui/core";
 import useSWR from "swr";
+import { GetServerSideProps } from "next";
+import { GylohWebUntis, TimeTable } from "gyloh-webuntis-api";
+import TimeTableLoader from "../src/components/time_table_loader";
+import { CalendarToday } from "@material-ui/icons";
 
-const Home: React.FC = () => {
-  const swr = useSWR("dashboard-tables", () => getCurrentTables(3))
+interface HomeProps {
+  dates: number[]
+}
 
-  let content
-  if(!swr) {
-    content = <Container>Ein Fehler ist aufgetreten.</Container>
-  }
-  else if(swr.error) content = (
-    <Container>Ein Fehler ist aufgetreten: {swr.error.message}</Container>
-  )
-  else if(!swr.data) content = (
-    <Box mt={6} marginX="auto" textAlign="center">
-      <CircularProgress />
-    </Box>
-  )
-  else content = (
-    <ResponsiveListView titles={swr.data.map(table => table.date.toLocaleDateString("de-DE"))}>
-      {swr.data.map((table, i) => <TimeTableView table={table} key={i} />)}
-    </ResponsiveListView>
-  );
-
+const Home: React.FC<HomeProps> = ({ dates }) => {
   return (
     <Page title="Vertretungsplan">
-      {content}
+        <ResponsiveListView iconComponent={CalendarToday} titles={dates.map(d => new Date(d).toLocaleDateString("de-DE"))}>
+          {dates.map((date, i) => (
+            <TimeTableLoader date={date} key={i} />
+          ))}
+      </ResponsiveListView>
     </Page>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  let tables: TimeTable[] = [];
+  try {
+    tables = await GylohWebUntis.getCurrentTables(3);
+  } catch(e) {
+    return {props: { dates: [] }, notFound: true}
+  }
+  const dates = tables.map(t => t.date.getTime());
+
+  return {
+    props: { dates }
+  }
 }
 
 export default Home;
