@@ -1,6 +1,7 @@
 import { CssBaseline } from "@material-ui/core";
 import { Head } from "next/document";
 import React from "react";
+import CookiePopup from "./cookie_popup";
 import PageBar from "./page_bar";
 
 
@@ -14,6 +15,7 @@ const Page: React.FC<PageProps> = ({ title, children }) => {
 			<CssBaseline />
 			<PageBar title={title} />
 			<main>{children}</main>
+			<CookiePopup />
 		</div>
 	);
 }
