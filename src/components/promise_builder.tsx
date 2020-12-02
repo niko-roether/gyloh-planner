@@ -10,7 +10,7 @@ export interface PromiseBuilderProps<T> {
 const DefaultPromiseBuilderPlaceholder: React.FC = () => {
 	return (
 		<Box textAlign="center" width="100%">
-			<CircularProgress />
+			<CircularProgress color="secondary" />
 		</Box>
 	);
 }

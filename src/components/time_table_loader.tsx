@@ -14,7 +14,7 @@ const TimeTableLoader: React.FC<TimeTableLoaderProps> = ({ date }) => {
 		refreshInterval: 20000,
 	});
 	if(res.error) return <Box textAlign="center" mt={4}>Fehler beim Laden: {res.error}</Box>
-	if(!res.data) return <Box textAlign="center" mt={4}><CircularProgress /></Box>
+	if(!res.data) return <Box textAlign="center" mt={4}><CircularProgress color="secondary" /></Box>
 	return <TimeTableView table={res.data} />
 }
 
