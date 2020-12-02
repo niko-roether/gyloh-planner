@@ -1,5 +1,7 @@
 import { Theme, ThemeProvider } from "@material-ui/core";
+import { NextPageContext } from "next";
 import React from "react";
+import { getCookie, setCookie } from "../util/cookie_utils";
 
 export type ThemeName = "light" | "dark";
 
@@ -17,20 +19,51 @@ export const ThemeContext = React.createContext<({
 	setTheme: () => null	
 })
 
-const ThemeManager: React.FC<ThemeManagerProps> = ({ lightTheme, darkTheme, defaultTheme, children }) => {
-	const [themeName, setThemeName] = React.useState<ThemeName>(defaultTheme || "light");
+interface ThemeManagerState {
+	themeName: ThemeName
+}
 
-	if(!darkTheme) darkTheme = lightTheme;
+class ThemeManager extends React.Component<ThemeManagerProps, ThemeManagerState> {
+	private static readonly COOKIE = "theme";
 
-	const theme = themeName == "light" ? lightTheme : darkTheme;
+	constructor(props: ThemeManagerProps) {
+		super(props);
+		this.state = {
+			themeName: props.defaultTheme || "light"
+		}
+	}
 
-	return (
-		<ThemeContext.Provider value={{themeName, setTheme: setThemeName}}>
-			<ThemeProvider theme={theme}>
-				{children}
-			</ThemeProvider>
-		</ThemeContext.Provider>
-	)
+	private setCookie(name: ThemeName) {
+		setCookie(ThemeManager.COOKIE, name, 2629746000, "/");
+	}
+
+	private setTheme(name: ThemeName) {
+		this.setCookie(name);
+		this.setState({ themeName: name});
+	}
+
+	private getSavedTheme(): string | null {
+		return getCookie(ThemeManager.COOKIE);
+	}
+
+	componentDidMount() {
+		const themeName = this.getSavedTheme();
+		if(themeName == "light" || themeName == "dark")
+			this.setTheme(themeName);
+	}
+
+	render() {
+		const { themeName } = this.state;
+		const { children, lightTheme, darkTheme } = this.props;
+		const theme = themeName == "light" ? lightTheme : darkTheme || lightTheme;
+		return (
+			<ThemeContext.Provider value={{themeName, setTheme: (name: ThemeName) => this.setTheme(name)}}>
+				<ThemeProvider theme={theme}>
+					{children}
+				</ThemeProvider>
+			</ThemeContext.Provider>
+		);
+	}
 }
 
 export default ThemeManager;
