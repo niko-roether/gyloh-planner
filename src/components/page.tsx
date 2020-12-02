@@ -11,9 +11,6 @@ export interface PageProps {
 const Page: React.FC<PageProps> = ({ title, children }) => {
 	return (
 		<div>
-			{/* <Head key={title}>
-				<title>{title}</title>
-			</Head> */}
 			<CssBaseline />
 			<PageBar title={title} />
 			<main>{children}</main>
