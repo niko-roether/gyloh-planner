@@ -3,8 +3,6 @@ import { GylohWebUntis } from "gyloh-webuntis-api";
 import { GetStaticProps } from "next";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import dark from "react-syntax-highlighter/dist/cjs/styles/hljs/darkula";
-import light from "react-syntax-highlighter/dist/cjs/styles/hljs/lightfair";
 import Heading from "../src/components/heading";
 import Page from "../src/components/page";
 import { ThemeContext } from "../src/components/theme_manager";
@@ -25,8 +23,6 @@ interface ApiReferenceProps {
 const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => {
 	const classes = useStyles();
 	const { themeName } = React.useContext(ThemeContext);
-
-	const syntaxTheme = themeName == "light" ? light : dark;
 
 	return (
 		<Page title="API-Referenz">
@@ -79,7 +75,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Typography paragraph>
 					Das allgemeine Ausgabeformat, dem alle Antworten dieser API folgen, hat folgendes Format:
 				</Typography>
-				<SyntaxHighlighter language="json" style={syntaxTheme}>
+				<SyntaxHighlighter language="json">
 					{
 						'{\n' +
 						'   "data": ...,\n' +
@@ -103,7 +99,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					{/* TODO update this if necessary */}
 					Alle Ausgaben dieser API beinhalten Vertretungspläne. Diese haben das folgende Format:
 				</Typography>
-				<SyntaxHighlighter language="json" style={syntaxTheme}>
+				<SyntaxHighlighter language="json">
 					{
 						'{\n' +
 						'   // Ein timestamp in Form der Millisekunden seit dem 1.1.1970, 00:00:00 UTC.\n' +
@@ -189,7 +185,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Typography paragraph>
 					Das Format sieht folgendermaßen aus:
 				</Typography>
-				<SyntaxHighlighter language="json" style={syntaxTheme}>
+				<SyntaxHighlighter language="json">
 					{
 						'{\n' +
 						'   "current": ...,\n' +
@@ -214,7 +210,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Typography paragraph>
 					Dies ist ein Beispieloutput für das Abrufen eines aktuellen Vertretungsplans am {new Date(exampleDate).toLocaleDateString("de-DE")}.
 				</Typography>
-				<SyntaxHighlighter language="json" className={classes.example} style={syntaxTheme}>{example}</SyntaxHighlighter>
+				<SyntaxHighlighter language="json" className={classes.example}>{example}</SyntaxHighlighter>
 			</Container>
 		</Page>
 	)
