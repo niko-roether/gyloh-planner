@@ -17,10 +17,10 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ dates }) => {
   return (
     <Page title="Vertretungsplan">
-        <ResponsiveListView iconComponent={CalendarToday} titles={dates.map(d => new Date(d).toLocaleDateString("de-DE"))}>
-          {dates.map((date, i) => (
-            <TimeTableLoader date={date} key={i} />
-          ))}
+      <ResponsiveListView iconComponent={CalendarToday} titles={dates.map(d => new Date(d).toLocaleDateString("de-DE"))}>
+        {dates.map((date, i) => (
+          <TimeTableLoader date={date} key={i} />
+        ))}
       </ResponsiveListView>
     </Page>
   )

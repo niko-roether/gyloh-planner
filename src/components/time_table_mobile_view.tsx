@@ -1,10 +1,8 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Backdrop, Box, Card, Dialog, Divider, IconButton, List, ListItem, ListItemText, makeStyles, Slide, Table, TableBody, TableCell, TableContainer, TableRow, Toolbar, Typography, useTheme } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Button, Card, Dialog, IconButton, List, ListItem, ListItemText, makeStyles, Slide, Table, TableBody, TableCell, TableContainer, TableRow, Toolbar, Typography, useTheme } from "@material-ui/core";
 import { TransitionProps } from "@material-ui/core/transitions/transition";
-import { ArrowBack as ArrowBackIcon, Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
-import { Class } from "gyloh-webuntis-api";
+import { Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import React from "react";
-import SubstitutionView from "./substitution_view";
-import { COLUMN_TITLES, TimeTableEntryFields, TimeTableEntryFieldsForClass, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
+import { COLUMN_TITLES, TimeTableEntryFields, TimeTableEntryFieldsForClass, TimeTableSubViewProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	summary: {
@@ -122,6 +120,11 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 					</ListItem>
 				))}
 			</List>
+			<Box textAlign="center" marginY={2}>
+					<Button variant="contained" onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}>
+						Zurück nach oben	
+					</Button>
+			</Box>
 			{currentClass && <ClassPopup 
 				data={data.find(d => d.class === currentClass) as TimeTableEntryFieldsForClass} 
 				onClose={back} 
