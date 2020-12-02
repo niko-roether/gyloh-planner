@@ -35,8 +35,7 @@ const COLUMN_TITLES = {
 	info: "Info",
 }
 
-export interface TimeTableViewEntryFields {
-	class: string,
+export interface TimeTableEntryFields {
 	lesson: string,
 	subject: string,
 	teacher: React.ReactNode
@@ -44,12 +43,17 @@ export interface TimeTableViewEntryFields {
 	info: React.ReactNode
 }
 
+export interface TimeTableEntryFieldsForClass {
+	class: string,
+	fields: TimeTableEntryFields[]
+}
+
 export interface TimeTableViewEntryProps {
-	fields: TimeTableViewEntryFields;
+	fieldsForClass: TimeTableEntryFieldsForClass;
 }
 
 export interface TimeTableSubViewProps {
-	data: TimeTableViewEntryFields[];
+	data: TimeTableEntryFieldsForClass[];
 }
 
 export interface TimeTableViewProps {
@@ -78,30 +82,36 @@ const ResponsiveTimeTableView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 }
 
 const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
-	const entryFields: TimeTableViewEntryFields[] = [];
+	const entryFields: TimeTableEntryFieldsForClass[] = [];
 	const classes = useStyles();
 	
-	table.entries.forEach((entry) => entry.classes.forEach(
-		(schoolClass) => {
+	table.affectedClasses.forEach(
+		affectedClass => {
 			entryFields.push({
-				class: schoolClass.longName,
-				lesson: entry.lesson,
-				subject: entry.subject.longName,
-				teacher: <SubstitutionView value={entry.teacher} current={c => c} subst={p => p} />,
-				room: (
-					<span>
-						{entry.rooms.map((room, i) => (
-							<React.Fragment>
-								<SubstitutionView value={room} current={c => c?.longName} subst={s => s?.longName} />
-								{i !== entry.rooms.length - 1 && <span>, </span>}
-							</React.Fragment>
-						))}
-					</span>
-				),
-				info: infoMessageCombine(entry.info, entry.message),
-			})
+				class: affectedClass.longName,
+				fields: table.entries
+					.filter(entry => entry.classes.some(cls => cls.shortName === affectedClass.shortName))
+					.map(entry => ({
+						lesson: entry.lesson,
+						subject: entry.subject.longName,
+						teacher: <SubstitutionView value={entry.teacher} current={c => c} subst={p => p} />,
+						room: (
+							<span>
+								{entry.rooms.map((room, i) => (
+									<React.Fragment>
+										<SubstitutionView value={room} current={c => c?.longName} subst={s => s?.longName} />
+										{i !== entry.rooms.length - 1 && <span>, </span>}
+									</React.Fragment>
+								))}
+							</span>
+						),
+						info: infoMessageCombine(entry.info, entry.message)
+					}))
+			});
 		}
-	));
+	);
+
+	console.log(entryFields);
 
 	entryFields.sort((a, b) => a.class.localeCompare(b.class, "de-DE", {numeric: true}));
 

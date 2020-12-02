@@ -19,29 +19,49 @@ const useStyles = makeStyles(theme => ({
 			background: theme.palette.grey[100],
 		}	
 	},
-	cell: {
-		"&:first-child": {
-			fontWeight: "bold",
-		}
+	firstCell: {
+		fontWeight: "bold",
+		background: theme.palette.grey[600],
+		color: "#fff"
 	}
 }));
 
 
-const TimeTableDesktopViewEntry: React.FC<TimeTableViewEntryProps> = ({ fields }) => {
+const TimeTableDesktopViewEntry: React.FC<TimeTableViewEntryProps> = ({ fieldsForClass }) => {
 	const classes = useStyles();
 	return (
-		<TableRow className={classes.row}>
-			<TableCell>{fields.class.longName}</TableCell>
-			<TableCell>{fields.lesson}</TableCell>
-			<TableCell>{fields.subject.longName}</TableCell>
-			<TableCell><SubstitutionView value={fields.teacher} current={c => c} subst={s => s} /></TableCell>
-			<TableCell>
-				{fields.rooms.map((room, i) => (
-					<SubstitutionView key={i} value={room} current={c => c?.longName} subst={s => s?.longName} />
-				))}
-			</TableCell>
-			<TableCell>{fields.info}</TableCell>
-		</TableRow>
+		// <TableRow className={classes.row}>
+		// 	<TableCell>{fields.class.longName}</TableCell>
+		// 	<TableCell>{fields.lesson}</TableCell>
+		// 	<TableCell>{fields.subject.longName}</TableCell>
+		// 	<TableCell><SubstitutionView value={fields.teacher} current={c => c} subst={s => s} /></TableCell>
+		// 	<TableCell>
+		// 		{fields.rooms.map((room, i) => (
+		// 			<SubstitutionView key={i} value={room} current={c => c?.longName} subst={s => s?.longName} />
+		// 		))}
+		// 	</TableCell>
+		// 	<TableCell>{fields.info}</TableCell>
+		// </TableRow>
+		<React.Fragment>
+			{fieldsForClass.fields.map((fields, i) => (
+				<TableRow key={i} className={classes.row}>
+					{i === 0 && 
+						<TableCell rowSpan={fieldsForClass.fields.length} className={classes.firstCell}>
+							{fieldsForClass.class.longName}
+						</TableCell>
+					}
+					<TableCell>{fields.lesson}</TableCell>
+				 	<TableCell>{fields.subject.longName}</TableCell>
+				 	<TableCell><SubstitutionView value={fields.teacher} current={c => c} subst={s => s} /></TableCell>
+				 	<TableCell>
+				 		{fields.rooms.map((room, i) => (
+							<SubstitutionView key={i} value={room} current={c => c?.longName} subst={s => s?.longName} />
+						))}
+					</TableCell>
+					<TableCell>{fields.info}</TableCell>
+				</TableRow>
+			))}
+		</React.Fragment>
 	)
 }
 
@@ -54,7 +74,7 @@ const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 
 	const entries = data.map((ef, i) => (
 		<TimeTableDesktopViewEntry 
-		fields={ef}
+		fieldsForClass={ef}
 		key={i}
 	/>
 	))

@@ -7,11 +7,14 @@ import { Box, CircularProgress, Container } from "@material-ui/core";
 import useSWR from "swr";
 
 const Home: React.FC = () => {
-  const swr = useSWR("dashboard-tables", () => getCurrentTables(3));
+  const swr = useSWR("dashboard-tables", () => getCurrentTables(3))
 
   let content
-  if(swr.error) content = (
-    <Container>Ein Fehler ist aufgetreten: {swr.error}</Container>
+  if(!swr) {
+    content = <Container>Ein Fehler ist aufgetreten.</Container>
+  }
+  else if(swr.error) content = (
+    <Container>Ein Fehler ist aufgetreten: {swr.error.message}</Container>
   )
   else if(!swr.data) content = (
     <Box mt={6} marginX="auto" textAlign="center">
