@@ -8,7 +8,7 @@ import { COLUMN_TITLES, TimeTableEntryFields, TimeTableEntryFieldsForClass, Time
 
 const useStyles = makeStyles(theme => ({
 	summary: {
-		overflowX: "hidden",
+		overflow: "hidden",
 		width: "100%"
 	},
 	subject: {
@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
 		paddingLeft: theme.spacing(1)
 	},
 	accordion: {
-		overflowX: "clip"
-	}
+		overflowX: "clip",
+	},
 }))
 
 interface TimeTableMobileViewEntryProps {
