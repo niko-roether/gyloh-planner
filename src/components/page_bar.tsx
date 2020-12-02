@@ -1,6 +1,7 @@
 import { AppBar, makeStyles, Slide, Toolbar, Typography, useMediaQuery, useScrollTrigger, useTheme } from "@material-ui/core";
 import React from "react";
-import PageNav from "./page_nav";import ThemeSwitch from "./theme_switch";
+import PageNav from "./page_nav";
+import ThemeSwitch from "./theme_switch";
 
 const useStyles = makeStyles({
 	heading: {
