@@ -38,7 +38,7 @@ const TimeTableMobileViewEntry: React.FC<TimeTableMobileViewEntryProps> = ({ fie
 	return (
 		<Accordion className={classes.accordion} square>
 			<AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
-				<Typography className={classes.subject}>{fields.subject.longName}</Typography>
+				<Typography className={classes.subject}>{fields.subject}</Typography>
 				<Typography className={classes.lesson}>{fields.lesson}</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
@@ -47,15 +47,11 @@ const TimeTableMobileViewEntry: React.FC<TimeTableMobileViewEntryProps> = ({ fie
 						<TableBody>
 							<TableRow>
 								<TableCell><b>{COLUMN_TITLES.teacher}</b></TableCell>
-								<TableCell><SubstitutionView value={fields.teacher} current={c => c} subst={s => s} /></TableCell>
+								<TableCell>{fields.teacher}</TableCell>
 							</TableRow>
 							<TableRow>
 								<TableCell><b>{COLUMN_TITLES.room}</b></TableCell>
-								<TableCell>
-									{fields.rooms.map((room, i) => (
-										<SubstitutionView key={i} value={room} current={r => r?.longName} subst={r => r?.longName} />
-									))}
-								</TableCell>
+								<TableCell>{fields.room}</TableCell>
 							</TableRow>
 							<TableRow>
 								<TableCell><b>{COLUMN_TITLES.info}</b></TableCell>
@@ -90,7 +86,7 @@ const ClassPopup: React.FC<ClassPopupProps> = ({ data, open, onClose }) => {
 			<AppBar position="static">
 				<Toolbar>
 					<IconButton edge="start" onClick={onClose} color="inherit"><CloseIcon /></IconButton>
-					<Typography variant="h6">{data.class.longName}</Typography>
+					<Typography variant="h6">{data.class}</Typography>
 				</Toolbar>
 			</AppBar>
 			<main className={classes.dialogContent}>
@@ -105,9 +101,9 @@ const ClassPopup: React.FC<ClassPopupProps> = ({ data, open, onClose }) => {
 
 const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	const classes = useStyles();
-	const [currentClass, setCurrentClass] = React.useState<Class | null>(null);
+	const [currentClass, setCurrentClass] = React.useState<string | null>(null);
 
-	const goToClass = (newClass: Class) => {
+	const goToClass = (newClass: string) => {
 		window.scrollTo({top: 0, behavior: "smooth"});
 		setCurrentClass(newClass);
 	}
@@ -120,17 +116,17 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 				{data.map(({ class: cls, fields: { length } }, i) => (
 					<ListItem key={i} button onClick={() => goToClass(cls)} divider>
 						<ListItemText 
-							primary={cls.longName} 
+							primary={cls} 
 							secondary={`${length} ${length === 1 ? "Eintrag" : "Einträge"}`} 
 						/>
 					</ListItem>
 				))}
 			</List>
 			{currentClass && <ClassPopup 
-				data={data.find(d => d.class.shortName === currentClass.shortName) as TimeTableEntryFieldsForClass} 
+				data={data.find(d => d.class === currentClass) as TimeTableEntryFieldsForClass} 
 				onClose={back} 
 				open
-				key={currentClass.shortName}
+				key={currentClass}
 			/>}
 		</React.Fragment>
 	);
