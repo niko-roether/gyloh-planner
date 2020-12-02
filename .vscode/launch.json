@@ -1,16 +1,16 @@
 {
 	"configurations": [
-	{
-		"name": "debug",
-		"request": "launch",
-		"runtimeArgs": [
-			"dev",
-		],
-		"runtimeExecutable": "yarn",
-		"skipFiles": [
-			"<node_internals>/**"
-		],
-		"type": "pwa-node"
-	}
-	]
+		{
+			"name": "debug",
+			"request": "launch",
+			"runtimeArgs": [
+				"dev",
+			],
+			"runtimeExecutable": "yarn",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"type": "pwa-node"
+		}
+	],
 }
