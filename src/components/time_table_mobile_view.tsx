@@ -1,10 +1,8 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Button, Card, Dialog, Divider, IconButton, List, ListItem, ListItemText, makeStyles, Slide, Table, TableBody, TableCell, TableContainer, TableRow, Toolbar, Typography } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Button, Card, Dialog, IconButton, List, ListItem, ListItemText, makeStyles, Slide, Table, TableBody, TableCell, TableContainer, TableRow, Toolbar, Typography } from "@material-ui/core";
 import { TransitionProps } from "@material-ui/core/transitions/transition";
-import { ArrowBack as ArrowBackIcon, Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
-import { Class } from "gyloh-webuntis-api";
+import { Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import React from "react";
-import SubstitutionView from "./substitution_view";
-import { COLUMN_TITLES, TimeTableEntryFields, TimeTableEntryFieldsForClass, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
+import { COLUMN_TITLES, TimeTableEntryFields, TimeTableEntryFieldsForClass, TimeTableSubViewProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	summary: {
