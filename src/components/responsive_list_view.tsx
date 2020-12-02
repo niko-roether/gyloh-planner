@@ -8,7 +8,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	controls: {
 		display: "flex",
-		margin: "auto"
+		margin: "auto",
+		padding: theme.spacing(0, 2)
 	},
 	buttonContainer: {
 		display: "flex",
