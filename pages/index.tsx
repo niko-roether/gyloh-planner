@@ -27,16 +27,15 @@ const Home: React.FC<HomeProps> = ({ dates }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let tables: TimeTable[] = [];
+  let dates: Date[] = [];
   try {
-    tables = await GylohWebUntis.getCurrentTables(3);
+    dates = await GylohWebUntis.getCurrentDates(3);
   } catch(e) {
-    return {props: { dates: [] }, notFound: true}
+    throw e;
   }
-  const dates = tables.map(t => t.date.getTime());
-
+  const timestamps = dates.map(d => d.getTime());
   return {
-    props: { dates }
+    props: { dates: timestamps }
   }
 }
 
