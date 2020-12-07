@@ -15,7 +15,7 @@ const Page: React.FC<PageProps> = ({ title, children }) => {
 			<CssBaseline />
 			<PageBar title={title} />
 			<main>{children}</main>
-			<CookiePopup />
+			{/* <CookiePopup /> */}
 		</div>
 	);
 }
