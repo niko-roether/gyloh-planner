@@ -2,13 +2,13 @@ import React from "react";
 
 const COOKIE_INDEFINITE = 378691200000;
 
-function setCookie(name: string, value: string, duration: number, path: string = location?.pathname || "/",) {
-	if(!document) throw Error("this function may only be executed on the client");
+function setCookie(name: string, value: string, duration: number, path: string = location?.pathname || "/"): void {
+	if(!document) return;
 	document.cookie = `${name}=${value}; expires=${new Date(Date.now() + duration)}; path=${path}; SameSite=Strict`
 }
 
 function getCookie(name: string): string | null {
-	if(!document) throw Error("this function may only be executed on the client");
+	if(!document) return null;
 	const regex = new RegExp(`${name}+=([a-zA-Z0-9_\\- ]+)(?=;|$)`);
 	const res = regex.exec(document.cookie);
 	return res ? res[1] : "";
