@@ -2035,10 +2035,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
 
-gyloh-webuntis-api@^1.4.5:
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/gyloh-webuntis-api/-/gyloh-webuntis-api-1.4.5.tgz#538be1645b405a426a31b5b67a5406fb2ddcdbb8"
-  integrity sha512-ucu+JB1UvIPpYq0Wf3pAtdYL9X5Y4mh12VUy7Ib/FMHH6qP6oqnBc0QOsWD7eHwLmIbqjYaHJqzkOwH0Epe4Aw==
+gyloh-webuntis-api@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/gyloh-webuntis-api/-/gyloh-webuntis-api-1.4.6.tgz#8241dadcbf731423fe935895ff8d4ac59aad0076"
+  integrity sha512-q9gUX153ZOcZzzBS722371erx4d5VHF3TSMqiLtquVRVQ+p1zO6guLf64PCqtjZGTLIMUVcMrxjLDejBlqzs8g==
   dependencies:
     axios "^0.21.0"
     he "^1.2.0"
