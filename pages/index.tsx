@@ -5,35 +5,18 @@ import { GetServerSideProps } from "next";
 import { GylohWebUntis, TimeTable } from "gyloh-webuntis-api";
 import TimeTableLoader from "../src/components/time_table_loader";
 import { CalendarToday } from "@material-ui/icons";
+import CurrentTimeTableLoader from "../src/components/current_time_table_loader";
 
 interface HomeProps {
 	dates: number[]
 }
 
-const Home: React.FC<HomeProps> = ({ dates }) => {
+const Home: React.FC<HomeProps> = () => {
 	return (
 		<Page title="Vertretungsplan">
-			<ResponsiveListView iconComponent={CalendarToday} titles={dates.map(d => new Date(d).toLocaleDateString("de-DE"))}>
-				{dates.map((date, i) => (
-					<TimeTableLoader date={date} key={i} />
-				))}
-			</ResponsiveListView>
+			<CurrentTimeTableLoader num={3} />
 		</Page>
 	)
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-	let tables: TimeTable[] = [];
-	try {
-		tables = await GylohWebUntis.getCurrentTables(3);
-	} catch(e) {
-		return {props: { dates: [] }, notFound: true}
-	}
-	const dates = tables.map(t => t.date.getTime());
-
-	return {
-		props: { dates }
-	}
 }
 
 export default Home;
