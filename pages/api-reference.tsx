@@ -55,8 +55,8 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 					Bestimmte Vertretungspläne können unter <code>{SERVER}/api/tables/get?date=[date]</code> gefunden werden, 
 					wobei <code>[date]</code> das entsprechende Datum ist. Ich empfehle als Format einen Timestamp in Form der Anzahl an 
 					Millisekunden seit dem 1.1.1970 00:00:00 UTC zu verwenden, da diese auch für die Rückgabe verwendet werden, aber es kann auch
-					ein <Link href="https://www.iso.org/iso-8601-date-and-time-format.html" color="secondary">ISO 8601-Formatiertes Datum</Link> (YYYY-MM-DD) oder 
-					ein <Link href="https://tools.ietf.org/html/rfc2822#section-3.3" color="secondary">IETF-konformer Timestamp nach RFC 2822</Link> verwendet werden.
+					ein <Link href="https://www.iso.org/iso-8601-date-and-time-format.html" color="secondary" target="_blank">ISO 8601-Formatiertes Datum</Link> (YYYY-MM-DD) oder 
+					ein <Link href="https://tools.ietf.org/html/rfc2822#section-3.3" color="secondary" target="_blank">IETF-konformer Timestamp nach RFC 2822</Link> verwendet werden.
 				</Typography>
 				<Typography paragraph>
 					Hierbei muss natürlich angemerkt werden, dass die Möglichkeit besteht, dass für einen bestimmten Tag kein Plan existiert.
