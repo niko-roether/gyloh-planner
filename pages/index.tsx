@@ -7,33 +7,33 @@ import TimeTableLoader from "../src/components/time_table_loader";
 import { CalendarToday } from "@material-ui/icons";
 
 interface HomeProps {
-  dates: number[]
+	dates: number[]
 }
 
 const Home: React.FC<HomeProps> = ({ dates }) => {
-  return (
-    <Page title="Vertretungsplan">
-      <ResponsiveListView iconComponent={CalendarToday} titles={dates.map(d => new Date(d).toLocaleDateString("de-DE"))}>
-        {dates.map((date, i) => (
-          <TimeTableLoader date={date} key={i} />
-        ))}
-      </ResponsiveListView>
-    </Page>
-  )
+	return (
+		<Page title="Vertretungsplan">
+			<ResponsiveListView iconComponent={CalendarToday} titles={dates.map(d => new Date(d).toLocaleDateString("de-DE"))}>
+				{dates.map((date, i) => (
+					<TimeTableLoader date={date} key={i} />
+				))}
+			</ResponsiveListView>
+		</Page>
+	)
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let tables: TimeTable[] = [];
-  try {
-    tables = await GylohWebUntis.getCurrentTables(3);
-  } catch(e) {
-    return {props: { dates: [] }, notFound: true}
-  }
-  const dates = tables.map(t => t.date.getTime());
+	let tables: TimeTable[] = [];
+	try {
+		tables = await GylohWebUntis.getCurrentTables(3);
+	} catch(e) {
+		return {props: { dates: [] }, notFound: true}
+	}
+	const dates = tables.map(t => t.date.getTime());
 
-  return {
-    props: { dates }
-  }
+	return {
+		props: { dates }
+	}
 }
 
 export default Home;

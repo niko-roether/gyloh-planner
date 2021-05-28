@@ -4,11 +4,11 @@ import ThemeManager from "../src/components/theme_manager";
 import { darkTheme, lightTheme } from "../src/theme/theme";
 
 const App: React.FC<AppProps> = ({Component, pageProps}) => {
-  return (
-    <ThemeManager lightTheme={lightTheme} darkTheme={darkTheme} defaultTheme="light">
-      <Component {...pageProps} />
-    </ThemeManager>
-  );
+	return (
+		<ThemeManager lightTheme={lightTheme} darkTheme={darkTheme} defaultTheme="light">
+			<Component {...pageProps} />
+		</ThemeManager>
+	);
 }
 
 export default App;
