@@ -11,7 +11,7 @@ const About: React.FC = () => {
 				<title>Gyloh Planner | About</title>
 			</Head>
 			<Container>
-				<Heading variant="h3">Was Ist Das Hier?</Heading>
+				<Heading variant="h3">Was ist das hier?</Heading>
 				<Typography paragraph>
 					Diese Seite ist aus Frustration mit dem neuen Gyloh-Vertretungsplan entstanden, der
 					diesmal nicht nur wieder unheimlich hässlich ist, sondern dazu noch nicht auf 

@@ -155,7 +155,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 						'            {\n' +
 						'                // Der Kurze, relativ unverständliche Name für diesen Raum, der auf dem offiziellen Vertretungsplan verwendet wird.\n' +
 						'               "shortName": "BGeo",\n' +
-						'               // Der lang ausgeschriebene Name der Klasse, wie beispielsweise "Physikraum 2" oder "Sporthalle 3".\n' +
+						'               // Der lang ausgeschriebene Name des Raumes, wie beispielsweise "Physikraum 2" oder "Sporthalle 3".\n' +
 						'               "longName": "Geografieraum"\n' +
 						'            },\n' +
 						'            ...\n' +
