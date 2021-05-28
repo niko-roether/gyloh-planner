@@ -44,8 +44,7 @@ const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => 
 				<Heading variant="h4" id="current-tables">Aktuelle Vertretungspläne</Heading>
 				<Typography paragraph>
 					Aktuelle Pläne können unter <code>{SERVER}/api/tables/current?num=[num]</code> gefunden werden, wobei <code>[num]</code>
-					die Anzahl an Plänen ist, die abgerufen werden sollen, anfangend mit dem nächsten Schultag. Die Ergebnisse werden in
-					form
+					die Anzahl an Plänen ist, die abgerufen werden sollen, anfangend mit dem nächsten Schultag.
 				</Typography>
 				<Typography paragraph>
 					Die Ergebnisse werden in Form eines Arrays an Vertretungsplänen ausgegeben (Siehe <Link href="#output-format" color="secondary">Ausgabeformat</Link>).
