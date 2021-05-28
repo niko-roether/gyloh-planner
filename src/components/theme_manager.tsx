@@ -1,8 +1,10 @@
 import { Theme, ThemeProvider } from "@material-ui/core";
 import React from "react";
-import { COOKIE_INDEFINITE, setCookie, useCookie } from "../util/cookie_utils";
 
-export type ThemeName = "light" | "dark";
+export enum ThemeName {
+	LIGHT = "light",
+	DARK = "dark"
+}
 
 export interface ThemeManagerProps {
 	lightTheme: Theme,
@@ -14,29 +16,45 @@ export const ThemeContext = React.createContext<({
 	themeName: ThemeName;
 	setTheme: (name: ThemeName) => void;
 })>({
-	themeName: "light",
+	themeName: ThemeName.LIGHT,
 	setTheme: () => null	
 });
 
-const THEME_COOKIE = "theme";
+interface ThemeManagerState {
+	themeName: ThemeName;
+}
 
-const ThemeManager: React.FC<ThemeManagerProps> = ({ lightTheme, darkTheme, defaultTheme = "light", children }) => {
-	const [themeName, setThemeName] = React.useState<ThemeName>(defaultTheme);
-	const saved = useCookie(THEME_COOKIE);
-	if((saved == "light" || saved == "dark") && themeName != saved) setThemeName(saved);
-
-	const setTheme = (name: ThemeName) => {
-		setThemeName(name);
-		setCookie(THEME_COOKIE, name, COOKIE_INDEFINITE, "/");
+class ThemeManager extends React.Component<ThemeManagerProps, ThemeManagerState> {
+	constructor(props: ThemeManagerProps) {
+		super(props);
+		this.state = {themeName: ThemeName.LIGHT};
 	}
 
-	return (
-		<ThemeContext.Provider value={{themeName, setTheme}}>
-			<ThemeProvider theme={themeName == "light" ? lightTheme : darkTheme || lightTheme}>
-				{children}
-			</ThemeProvider>
-		</ThemeContext.Provider>
-	);
+	private setTheme(themeName: ThemeName) {
+		this.setState({themeName});
+		localStorage.setItem("theme", themeName);
+	}
+
+	render() {
+		const {themeName} = this.state;
+		const setTheme = (themeName: ThemeName) => this.setTheme(themeName);
+		const {lightTheme, darkTheme, children} = this.props;
+		return (
+			<ThemeContext.Provider value={{themeName, setTheme}}>
+				<ThemeProvider theme={themeName == "light" ? lightTheme : darkTheme || lightTheme}>
+					{children}
+				</ThemeProvider>
+			</ThemeContext.Provider>
+		);	
+	}
+
+	componentDidMount() {
+		const storedTheme = localStorage.getItem("theme");
+		if(storedTheme && (storedTheme == ThemeName.LIGHT || storedTheme == ThemeName.DARK))
+			this.setTheme(storedTheme);
+		else
+			localStorage.setItem("theme", this.state.themeName);
+	}
 }
 
 export default ThemeManager;

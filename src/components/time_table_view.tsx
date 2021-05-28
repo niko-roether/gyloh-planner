@@ -1,4 +1,4 @@
-import { Container, Hidden, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import { Box, Button, Container, Hidden, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import { Class, Room, Subject, Substitution, TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import TimeTableMobileView from "./time_table_mobile_view";
@@ -80,9 +80,10 @@ const ResponsiveTimeTableView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 
 export interface TimeTableViewProps {
 	table: TimeTable;
+	refresh?: () => void
 }
 
-const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
+const TimeTableView: React.FC<TimeTableViewProps> = ({ table, refresh }) => {
 	const entryFields: TimeTableEntryFieldsForClass[] = [];
 	const classes = useStyles();
 	
@@ -120,7 +121,12 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 				<Typography variant="h4">
 					Vertretungsplan {table.date.toLocaleDateString("de-De", {weekday: "short", day: "numeric", month: "numeric", year: "numeric"})}
 				</Typography>
-				<Typography variant="subtitle1">Stand {table.lastUpdate}</Typography>
+				<Box display="flex" alignItems="center">
+					<Typography variant="subtitle1" display="inline">Stand {table.lastUpdate}</Typography>
+					{refresh && (
+						<Box ml={1} display="inline-block"><Button onClick={refresh} variant="contained" size="small">Aktualisieren</Button></Box>
+					)}
+				</Box>
 			</div>
 			<List>
 				{table.messages.map((msg, i) => (
@@ -136,7 +142,7 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table }) => {
 }
 
 export {
-	COLUMN_TITLES,
+	COLUMN_TITLES
 }
 
 export default TimeTableView;

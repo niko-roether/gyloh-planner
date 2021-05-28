@@ -1,4 +1,4 @@
-import { Button, Hidden, makeStyles, MobileStepper, Paper, Step, StepButton, Stepper, useTheme } from "@material-ui/core";
+import { Box, Button, CircularProgress, Hidden, makeStyles, MobileStepper, Paper, Step, StepButton, Stepper, useTheme } from "@material-ui/core";
 import { FiberManualRecord as CircleIcon, KeyboardArrowLeft as KeyboardArrowLeftIcon, KeyboardArrowRight as KeyboardArrowRightIcon, SvgIconComponent } from "@material-ui/icons";
 import React from "react";
 
@@ -26,9 +26,10 @@ export interface ResponsiveListViewProps<P> {
 	iconComponent?: SvgIconComponent;
 	titles?: string[];
 	componentProps?: P;
+	loading?: boolean;
 }
 
-const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component = "div", iconComponent = CircleIcon, children, componentProps, titles}) => {
+const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component = "div", iconComponent = CircleIcon, children, componentProps, titles, loading = false}) => {
 	const theme = useTheme();
 	const [index, setIndex] = React.useState<number>(0);
 	const classes = useStyles();
@@ -91,7 +92,11 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 					</nav>
 				</Hidden>
 			</Paper>
-			{elements.map((e, i) => (
+			{loading ? (
+				<Box marginX="auto" mt={2} textAlign="center">
+					<CircularProgress />
+				</Box>
+			) : elements.map((e, i) => (
 				<div key={i} style={{display: i === index ? "block" : "none"}}>
 					{e}
 				</div>

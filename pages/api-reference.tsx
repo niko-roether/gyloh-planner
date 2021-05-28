@@ -1,11 +1,11 @@
 import { Container, Link, makeStyles, Typography } from "@material-ui/core";
 import { GylohWebUntis } from "gyloh-webuntis-api";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Heading from "../src/components/heading";
 import Page from "../src/components/page";
-import { ThemeContext } from "../src/components/theme_manager";
 import { SERVER } from "../src/config";
 
 const useStyles = makeStyles(theme => ({
@@ -22,10 +22,12 @@ interface ApiReferenceProps {
 
 const ApiReference: React.FC<ApiReferenceProps> = ({ example, exampleDate }) => {
 	const classes = useStyles();
-	const { themeName } = React.useContext(ThemeContext);
 
 	return (
 		<Page title="API-Referenz">
+			<Head>
+				<title>Gyloh Planner | Api-Referenz</title>
+			</Head>
 			<Container>
 				<Heading variant="h3" id="api-reference">API-Referenz</Heading>
 				<Typography paragraph>

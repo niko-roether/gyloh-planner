@@ -1,4 +1,5 @@
 import { Container, Link, Typography } from "@material-ui/core";
+import Head from "next/head";
 import React from "react";
 import Heading from "../src/components/heading";
 import Page from "../src/components/page";
@@ -6,6 +7,9 @@ import Page from "../src/components/page";
 const About: React.FC = () => {
 	return (
 		<Page title="About">
+			<Head>
+				<title>Gyloh Planner | About</title>
+			</Head>
 			<Container>
 				<Heading variant="h3">Was Ist Das Hier?</Heading>
 				<Typography paragraph>
