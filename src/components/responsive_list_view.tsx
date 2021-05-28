@@ -93,8 +93,8 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 				</Hidden>
 			</Paper>
 			{loading ? (
-				<Box marginX="auto" mt={2} textAlign="center">
-					<CircularProgress />
+				<Box marginX="auto" mt={4} textAlign="center">
+					<CircularProgress color="secondary" />
 				</Box>
 			) : elements.map((e, i) => (
 				<div key={i} style={{display: i === index ? "block" : "none"}}>
