@@ -29,10 +29,10 @@ const CurrentTimeTableLoader = ({num}: CurrentTimeTableLoaderProps) => {
 		<ResponsiveListView 
 			iconComponent={CalenderIcon}
 			titles={tables?.map(t => t.date.toLocaleDateString("de-DE")) ?? Array(num).fill("loading...")}
-			loading={!tables}
+			loading={loading}
 		>
 			{tables && !error ? tables.map((t, i) => (
-				<TimeTableView table={t} key={i}/>
+				<TimeTableView table={t} refresh={refresh} key={i}/>
 			)) : "Ein Fehler ist aufgetreten."}
 		</ResponsiveListView>
 	)
