@@ -3,12 +3,12 @@ import { FiberManualRecord as CircleIcon, KeyboardArrowLeft as KeyboardArrowLeft
 import React from "react";
 
 const useStyles = makeStyles(theme => ({
-	stepper: {
-		flex: 4
+	step: {
+		padding: theme.spacing(0, 5)
 	},
 	controls: {
 		display: "flex",
-		margin: "auto",
+		justifyContent: "center",
 		padding: theme.spacing(0, 2)
 	},
 	buttonContainer: {
@@ -67,16 +67,16 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 					/>
 				</Hidden>
 				<Hidden smDown>
-					<nav className={classes.controls}  style={{maxWidth: 300 * elements.length}}>
+					<nav className={classes.controls}>
 						<div className={classes.buttonContainer}>
 							<Button variant="contained" color="primary" onClick={toPrev} disabled={index === 0}>
 								{theme.direction === 'rtl' ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
 								Zurück
 							</Button>
 						</div>
-						<Stepper className={classes.stepper} activeStep={index} alternativeLabel nonLinear>
+						<Stepper activeStep={index} alternativeLabel nonLinear>
 							{elements.map((_, i) => (
-								<Step key={i}>
+								<Step className={classes.step} key={i}>
 									<StepButton onClick={() => setIndex(i)} icon={<IconComponent color={index === i ? "inherit" : "disabled"} />}>
 										{titles ? titles[i] : i + 1}
 									</StepButton>

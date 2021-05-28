@@ -28,7 +28,7 @@ const CurrentTimeTableLoader = ({num}: CurrentTimeTableLoaderProps) => {
 	return (
 		<ResponsiveListView 
 			iconComponent={CalenderIcon}
-			titles={tables?.map(t => t.date.toLocaleDateString("de-DE")) ?? Array(num).fill("loading...")}
+			titles={tables?.map(t => t.date.toLocaleDateString("de-DE")) ?? ["laden..."]}
 			loading={loading}
 		>
 			{tables && !error ? tables.map((t, i) => (
