@@ -1,10 +1,6 @@
 import React from "react";
 import Page from "../src/components/page";
-import { getCurrentTables } from "../src/api_consume/consume_table";
-import TimeTableView from "../src/components/time_table_view";
 import ResponsiveListView from "../src/components/responsive_list_view";
-import { Box, CircularProgress, Container } from "@material-ui/core";
-import useSWR from "swr";
 import { GetServerSideProps } from "next";
 import { GylohWebUntis, TimeTable } from "gyloh-webuntis-api";
 import TimeTableLoader from "../src/components/time_table_loader";
