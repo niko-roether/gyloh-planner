@@ -15,7 +15,8 @@ function SubstitutionView<T>({ value, current, subst }: SubstitutionViewProps<T>
 	if(isSubstitution(value)) {
 		if(!value.current) return <span>(<s>{current(value.subst || undefined)}</s>)</span>;
 		console.log(value.current);
-		return <span>{current(value.current || undefined)} (<s>{subst(value.subst || undefined)}</s>)</span>;
+		if(!value.subst) return <span>{current(value.current ?? undefined)}</span>;
+		return <span>{current(value.current ?? undefined)} (<s>{subst(value.subst ?? undefined)}</s>)</span>;
 	}
 	return <span>{current(value)}</span>
 }
