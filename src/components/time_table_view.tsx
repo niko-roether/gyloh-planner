@@ -22,6 +22,10 @@ const useStyles = makeStyles(theme => ({
 			margin: theme.spacing(0, 2),
 			fontSize: "0.8em"
 		}
+	},
+	noEntries: {
+		marginTop: theme.spacing(2),
+		fontStyle: "italic"
 	}
 }))
 
@@ -136,7 +140,10 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table, refresh }) => {
 					</ListItem>
 				))}
 			</List>
-			<ResponsiveTimeTableView data={entryFields} />
+			{entryFields.length > 0 
+				? <ResponsiveTimeTableView data={entryFields} />
+				: <div className={classes.noEntries}>Keine Einträge</div>
+			}
 		</Container>
 	)
 }
