@@ -1,5 +1,5 @@
 import { Box, Button, Container, Hidden, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
-import { Class, Room, Subject, Substitution, TimeTable } from "gyloh-webuntis-api";
+import { TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import TimeTableMobileView from "./time_table_mobile_view";
 import TimeTableDesktopView from "./time_table_desktop_view";
