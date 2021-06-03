@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
 	dateInput: {
 		fontSize: "1em",
 		marginLeft: theme.spacing(4),
-		minWidth: "300px"
+		minWidth: "150px"
 	},
 	submitInput: {
 		marginLeft: theme.spacing(2),
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	dateInputMobile: {
 		fontSize: "0.85em",
-		minWidth: "300px"
+		minWidth: "150px"
 	}
 }));
 
