@@ -13,7 +13,7 @@ function parseTable(data: any): TimeTable {
 function handleResponse<T>(res: any): T {
 	if(!res) throw new Error("A communication error occured");
 	if(res.error) throw new Error(`Request failed: ${res.error}`);
-	if(!res.data) throw new Error("Not found");
+	if(!res.data) throw new Error("Keine Tabelle für diesen Tag gefunden.");
 	return res.data as T;
 }
 

@@ -35,7 +35,6 @@ const FindTableForm = ({id = "find-table-form", onSubmit}: FindTableFormProps) =
 	const submit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const date = new Date((e.target as any)[0].value);
-		console.log(date);
 		if(!date) return;
 		onSubmit?.(date);
 	}
@@ -44,7 +43,7 @@ const FindTableForm = ({id = "find-table-form", onSubmit}: FindTableFormProps) =
 		<Box mt={5} marginX="auto" width="95%" maxWidth="720px">
 			<form id={id} onSubmit={e => submit(e)}>
 				<Heading variant="h4">
-					<Box display="flex" justifyContent="space-between" flexDirection={mobileView ? "column" : "row"} textAlign="center">
+					<Box display="flex" justifyContent="space-between" flexDirection={mobileView ? "column" : "row"} textAlign="center" alignItems="center">
 						<label htmlFor="date-input">Finde Tabelle für den:</label>
 						<span>
 							<Input
