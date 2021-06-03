@@ -25,7 +25,7 @@ const handler: NextApiHandler = async (req, res) => {
 	if(num === NaN) return res.status(400).end(apiError("Argument 'num' must be a number"));
 
 	const tables = await GylohWebUntis.getCurrentTables(num);
-	res.status(200).end(apiRawResponse(`[${tables.map(table => jsonEncodeTable(table)).join(",")}]`));
+	res.status(200).end(apiRawResponse(`[${tables.map(table => table ? jsonEncodeTable(table) : "null").join(",")}]`));
 }
 
 export default handler;
