@@ -14,7 +14,6 @@ function isSubstitution<T>(val: any): val is Substitution<T> {
 function SubstitutionView<T>({ value, current, subst }: SubstitutionViewProps<T>): React.ReactElement {
 	if(isSubstitution(value)) {
 		if(!value.current) return <span>(<s>{current(value.subst || undefined)}</s>)</span>;
-		console.log(value.current);
 		if(!value.subst) return <span>{current(value.current ?? undefined)}</span>;
 		return <span>{current(value.current ?? undefined)} (<s>{subst(value.subst ?? undefined)}</s>)</span>;
 	}

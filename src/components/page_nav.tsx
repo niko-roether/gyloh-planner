@@ -1,5 +1,5 @@
 import { Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, SwipeableDrawer } from "@material-ui/core";
-import { CalendarToday as CalendarTodayIcon, Close as CloseIcon, Code as CodeIcon, Feedback as FeedbackIcon, Info as InfoIcon, Menu as MenuIcon } from "@material-ui/icons";
+import { CalendarToday as CalendarTodayIcon, CalendarViewDay as CalendarViewDayIcon, Close as CloseIcon, Code as CodeIcon, Feedback as FeedbackIcon, Info as InfoIcon, Menu as MenuIcon } from "@material-ui/icons";
 import React from "react";
 import Link from "next/link";
 
@@ -46,6 +46,12 @@ const PageNav: React.FC = () => {
 							<ListItem button>
 								<ListItemIcon><CalendarTodayIcon /></ListItemIcon>
 								<ListItemText>Vertretungsplan</ListItemText>
+							</ListItem>
+						</Link>
+						<Link href="/table-finder">
+							<ListItem button>
+								<ListItemIcon><CalendarViewDayIcon /></ListItemIcon>
+								<ListItemText>Tabellenfinder</ListItemText>
 							</ListItem>
 						</Link>
 						<Link href="/about">

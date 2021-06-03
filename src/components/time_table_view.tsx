@@ -1,5 +1,5 @@
 import { Box, Button, Container, Hidden, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
-import { Class, Room, Subject, Substitution, TimeTable } from "gyloh-webuntis-api";
+import { TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import TimeTableMobileView from "./time_table_mobile_view";
 import TimeTableDesktopView from "./time_table_desktop_view";
@@ -22,6 +22,10 @@ const useStyles = makeStyles(theme => ({
 			margin: theme.spacing(0, 2),
 			fontSize: "0.8em"
 		}
+	},
+	noEntries: {
+		marginTop: theme.spacing(2),
+		fontStyle: "italic"
 	}
 }))
 
@@ -136,7 +140,10 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table, refresh }) => {
 					</ListItem>
 				))}
 			</List>
-			<ResponsiveTimeTableView data={entryFields} />
+			{entryFields.length > 0 
+				? <ResponsiveTimeTableView data={entryFields} />
+				: <div className={classes.noEntries}>Keine Einträge</div>
+			}
 		</Container>
 	)
 }
