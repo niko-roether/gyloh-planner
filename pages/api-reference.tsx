@@ -222,7 +222,7 @@ export const getStaticProps: GetStaticProps<ApiReferenceProps> = async () => {
 	const dateParsed = res.map(table => {
 		return {
 			...table,
-			date: table.date.getTime()
+			date: table?.date.getTime()
 		}
 	});
 	return {
