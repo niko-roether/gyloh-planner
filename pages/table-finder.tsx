@@ -1,4 +1,3 @@
-import { SentimentDissatisfiedTwoTone } from "@material-ui/icons";
 import Head from "next/head";
 import React from "react";
 import FindTableForm from "../src/components/find_table_form";
