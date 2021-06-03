@@ -5,14 +5,16 @@ import Heading from "./heading";
 const useStyles = makeStyles(theme => ({
 	dateInput: {
 		fontSize: "1em",
-		marginLeft: theme.spacing(4)
+		marginLeft: theme.spacing(4),
+		minWidth: "300px"
 	},
 	submitInput: {
 		marginLeft: theme.spacing(2),
 		verticalAlign: "baseline"
 	},
 	dateInputMobile: {
-		fontSize: "0.85em"
+		fontSize: "0.85em",
+		minWidth: "300px"
 	}
 }));
 
