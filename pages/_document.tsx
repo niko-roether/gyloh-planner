@@ -6,7 +6,7 @@ import { lightTheme as theme } from '../src/theme/theme';
 export default class MyDocument extends Document {
 	render() {
 		return (
-			<Html lang="de">
+			<Html lang="de" prefix="og: https://ogp.me/ns#">
 				<Head>
 					{/* PWA primary color */}
 					<meta name="theme-color" content={theme.palette.primary.main} />
@@ -15,6 +15,10 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 					/>
+
+					<meta property="og:title" content="Gyloh Planner" />
+					<meta property="og:type" content="website" />
+					<meta property="og:image" content={`https://${process.env.HOSTNAME}/api/preview/current`} />
 				</Head>
 				<body>
 					<Main />
