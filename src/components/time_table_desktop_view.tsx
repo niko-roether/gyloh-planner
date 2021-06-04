@@ -1,8 +1,8 @@
 import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { TimeTable } from "gyloh-webuntis-api";
 import React from "react";
-import SubstitutionView from "./substitution_view";
-import { COLUMN_TITLES, TimeTableSubViewProps, TimeTableViewEntryProps } from "./time_table_view";
+import { TimeTableViewEntryProps } from "../util/time_table_utils";
+import { COLUMN_TITLES, TimeTableSubViewProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	tableContainer: {
@@ -23,6 +23,11 @@ const useStyles = makeStyles(theme => ({
 			background: theme.palette.action.hover
 		}	
 	},
+	screenFillingTable: {
+		margin: 0,
+		padding: 0,
+		borderRadius: 0
+	}
 }));
 
 
@@ -48,11 +53,11 @@ const TimeTableDesktopViewEntry: React.FC<TimeTableViewEntryProps> = ({ fieldsFo
 	)
 }
 
-export interface TimeTableTableViewProps {
-	table: TimeTable;
+export interface TimeTableTableDesktopViewProps extends TimeTableSubViewProps {
+	fillUpScreen?: boolean;
 }
 
-const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data }) => {
+const TimeTableDesktopView: React.FC<TimeTableTableDesktopViewProps> = ({ data, fillUpScreen = false }) => {
 	const classes = useStyles();
 
 	const entries = data.map((ef, i) => (
@@ -63,7 +68,7 @@ const TimeTableDesktopView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	))
 
 	return (
-		<TableContainer component={Paper} className={classes.tableContainer}>
+		<TableContainer component={Paper} className={fillUpScreen ? classes.screenFillingTable : classes.tableContainer}>
 			<Table stickyHeader>
 				<TableHead>
 					<TableRow>

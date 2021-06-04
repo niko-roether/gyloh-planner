@@ -55,6 +55,13 @@ function apiRawResponse(res: string) {
 	return `{"data":${res}}`;
 }
 
+function parseTable(data: any, json: boolean = false): TimeTable {
+	if(!json) data = JSON.parse(data);
+	return new TimeTable({
+		...data,
+		date: new Date(data.date),
+	});
+}
 
 export {
 	apiResponse,
@@ -63,5 +70,6 @@ export {
 	requireMethods,
 	requireQueryArg,
 	apiRawResponse,
-	jsonEncodeTable
+	jsonEncodeTable,
+	parseTable
 }

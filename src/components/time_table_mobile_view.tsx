@@ -2,7 +2,8 @@ import { Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Button, Car
 import { TransitionProps } from "@material-ui/core/transitions/transition";
 import { Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import React from "react";
-import { COLUMN_TITLES, TimeTableEntryFields, TimeTableEntryFieldsForClass, TimeTableSubViewProps } from "./time_table_view";
+import { TimeTableEntryFieldsForClass } from "../util/time_table_utils";
+import { COLUMN_TITLES, TimeTableEntryFields, TimeTableSubViewProps } from "./time_table_view";
 
 const useStyles = makeStyles(theme => ({
 	summary: {

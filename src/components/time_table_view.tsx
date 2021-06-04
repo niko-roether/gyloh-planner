@@ -1,11 +1,11 @@
-import { Box, Button, Container, Hidden, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import { Box, Button, Container, Hidden, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography} from "@material-ui/core";
 import { TimeTable } from "gyloh-webuntis-api";
 import React from "react";
 import TimeTableMobileView from "./time_table_mobile_view";
 import TimeTableDesktopView from "./time_table_desktop_view";
 import { Info as InfoIcon } from "@material-ui/icons";
 import { Parser as HTMLParser } from "html-to-react";
-import SubstitutionView from "./substitution_view";
+import { tableToEntryFields, TimeTableEntryFieldsForClass } from "../util/time_table_utils";
  
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -47,27 +47,12 @@ export interface TimeTableEntryFields {
 	info: React.ReactNode
 }
 
-export interface TimeTableEntryFieldsForClass {
-	class: string,
-	fields: TimeTableEntryFields[]
-}
-
-export interface TimeTableViewEntryProps {
-	fieldsForClass: TimeTableEntryFieldsForClass;
-}
-
-export interface TimeTableSubViewProps {
-	data: TimeTableEntryFieldsForClass[];
-}
-
-
-function infoMessageCombine(info: string, message: string) {
-	if(info !== "" && message !== "") return `${info}; ${message}`;
-	if(info !== "") return info;
-	return message;
-}
 
 const htmlParser = new HTMLParser();
+
+export interface TimeTableSubViewProps {
+	data: TimeTableEntryFieldsForClass[]
+}
 
 const ResponsiveTimeTableView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	return (
@@ -88,36 +73,9 @@ export interface TimeTableViewProps {
 }
 
 const TimeTableView: React.FC<TimeTableViewProps> = ({ table, refresh }) => {
-	const entryFields: TimeTableEntryFieldsForClass[] = [];
 	const classes = useStyles();
 	
-	table.affectedClasses.forEach(
-		affectedClass => {
-			entryFields.push({
-				class: affectedClass.longName,
-				fields: table.entries
-					.filter(entry => entry.classes.some(cls => cls.shortName === affectedClass.shortName))
-					.map((entry, i) => ({
-						lesson: entry.lesson,
-						subject: entry.subject.longName,
-						teacher: <SubstitutionView value={entry.teacher} current={c => c} subst={p => p} key={i} />,
-						room: (
-							<span>
-								{entry.rooms.map((room, i) => (
-									<React.Fragment key={i}>
-										<SubstitutionView value={room} current={c => c?.longName} subst={s => s?.longName} />
-										{i !== entry.rooms.length - 1 && <span>, </span>}
-									</React.Fragment>
-								))}
-							</span>
-						),
-						info: infoMessageCombine(entry.info, entry.message)
-					}))
-			});
-		}
-	);
-
-	entryFields.sort((a, b) => a.class.localeCompare(b.class, "de-DE", {numeric: true}));
+	const entryFields = tableToEntryFields(table);
 
 	return (
 		<Container className={classes.container}>
@@ -149,7 +107,9 @@ const TimeTableView: React.FC<TimeTableViewProps> = ({ table, refresh }) => {
 }
 
 export {
-	COLUMN_TITLES
+	COLUMN_TITLES,
+	TimeTableMobileView,
+	TimeTableDesktopView
 }
 
 export default TimeTableView;

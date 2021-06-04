@@ -1,14 +1,8 @@
 import { TimeTable } from "gyloh-webuntis-api";
 import { SERVER } from "../config";
+import { parseTable } from "../util/api_util";
 
 const API_BASE = SERVER + "/api/tables"
-
-function parseTable(data: any): TimeTable {
-	return new TimeTable({
-		...data,
-		date: new Date(data.date),
-	});
-}
 
 function handleResponse<T>(res: any): T {
 	if(!res) throw new Error("A communication error occured");
@@ -20,13 +14,13 @@ function handleResponse<T>(res: any): T {
 async function getCurrentTables(num: number): Promise<TimeTable[] | null> {
 	const res = await fetch(API_BASE + `/current?num=${num}`).then(res => res.json());
 	const data = handleResponse<any[]>(res);
-	return data.map((d: any) => parseTable(d));
+	return data.map((d: any) => parseTable(d, true));
 }
 
 async function getTable(date: Date | string | number) {
 	if(!(date instanceof Date)) date = new Date(date);
 	const res = await fetch(API_BASE + `/get?date=${date.getTime()}`).then(res => res.json());
-	return parseTable(handleResponse(res));
+	return parseTable(handleResponse(res), true);
 }
 
 export {
