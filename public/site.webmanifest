@@ -1,6 +1,9 @@
 {
-	"name":"Gyloh Planner",
-	"short_name":"Gyloh Planner",
+	"name": "Gyloh Planner",
+	"short_name": "Gyloh Planner",
+	"description": "Eine Web-App die den Vertretungsplan des Gyloh anzeigt - auf allen Geräten lesbar, und ohne Anmeldung.",
+	"lang": "de",
+	"start_url": ".",
 	"icons": [
 		{
 			"src": "/android-chrome-192x192.png",
@@ -9,10 +12,54 @@
 		},
 		{
 			"src": "/android-chrome-512x512.png",
-			"sizes": "512x512","type":"image/png"
+			"sizes": "512x512",
+			"type":"image/png"
 		}
 	],
-	"theme_color": "##3f51b5",
+	"theme_color": "#3f51b5",
 	"background_color": "#ffffff",
-	"display": "standalone"
+	"display": "standalone",
+	"orientation": "portrait",
+	"screenshots": [
+		{
+			"src": "screenshots/main-pc.png",
+			"sizes": "1903x1177",
+			"type": "image/png"
+		},
+		{
+			"src": "screenshots/main-mobile.png",
+			"sizes": "375x667",
+			"type": "image/png"
+		},
+		{
+			"src": "screenshots/class-mobile.png",
+			"sizes": "357x667",
+			"type": "image/png"
+		},
+		{
+			"src": "screenshots/table-finder.png",
+			"sizes": "1903x966",
+			"type": "image/png"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "Vertretungsplan",
+			"url": "/",
+			"description": "Die drei aktuellen Vertretungspläne"
+		},
+		{
+			"name": "Tabellenfinder",
+			"url": "/table-finder",
+			"description": "Finde den Vertretungsplan für einen beliebigen Tag"
+		},
+		{
+			"name": "Was ist das hier?",
+			"url": "/about"
+		},
+		{
+			"name": "API-Referenz",
+			"url": "/api-reference"
+		}
+	]
 }
