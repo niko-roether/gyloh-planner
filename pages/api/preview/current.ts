@@ -1,7 +1,10 @@
-import { NextApiHandler } from "next";
+// import { NextApiHandler } from "next";
+// import { screenshot } from "../../../src/util/screenshot";
 
-const PreviewCurrent: NextApiHandler = async (req, res) => {
-	res.redirect(`https://api.apiflash.com/v1/urltoimage?access_key=${process.env.SCREENSHOT_API_KEY}&width=200&height=150&url=https://${process.env.HOSTNAME}/show/current`)
-}
+// const PreviewCurrent: NextApiHandler = async (req, res) => {
+// 	res.setHeader("Content-Type", "image/png");
+// 	const data = screenshot(process.env.HOSTNAME + "/show/current");
+// 	data.once("close", () => console.log(data));
+// }
 
-export default PreviewCurrent;
+// export default PreviewCurrent;
