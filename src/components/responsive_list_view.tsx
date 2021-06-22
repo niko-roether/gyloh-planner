@@ -46,9 +46,9 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 		<Component {...componentProps}>
 			<Paper square>
 				<Hidden mdUp>
-					<MobileStepper 
+					<MobileStepper
 						variant="text"
-						position="static"
+						position="bottom"
 						activeStep={index}
 						steps={elements.length}
 						className={classes.mobileStepper}

@@ -121,10 +121,10 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 					</ListItem>
 				))}
 			</List>
-			<Box textAlign="center" marginY={2}>
-					<Button variant="contained" onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}>
-						Zurück nach oben	
-					</Button>
+			<Box textAlign="center" marginY={2} mb={8}>
+				<Button variant="contained" onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}>
+					Zurück nach oben	
+				</Button>
 			</Box>
 			{currentClass && <ClassPopup 
 				data={data.find(d => d.class === currentClass) as TimeTableEntryFieldsForClass} 
