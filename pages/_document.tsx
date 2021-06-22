@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
 					<meta property="og:description" content="Eine öffentliche, nutzerfreundliche und responsive Web-App für den Vertretungsplan des Gymnasium Lohbrügge." />
 					<meta property="og:locale" content="de_DE" />
 					<meta property="og:type" content="website" />
-					<meta property="og:image" content={process.env.PUBLIC_URL + "android-chrome-512x512.png"} />
+					<meta property="og:image" content={process.env.HOSTNAME + "android-chrome-512x512.png"} />
 					<meta property="og:image:width" content="512" />
 					<meta property="og:image:height" content="512" />
 					<meta property="og:image:type" content="image/png" />
