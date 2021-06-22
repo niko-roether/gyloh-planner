@@ -2,6 +2,7 @@ import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { lightTheme as theme } from '../src/theme/theme';
+import { SERVER } from '../src/config';
 
 export default class MyDocument extends Document {
 	render() {
@@ -16,9 +17,19 @@ export default class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 					/>
 
+					<meta name="title" content="Gyloh Planner" />
+					<meta name="description" content="Eine öffentliche, nutzerfreundliche und responsive Web-App für den Vertretungsplan des Gymnasium Lohbrügge." />
+					
 					<meta property="og:title" content="Gyloh Planner" />
+					<meta property="og:description" content="Eine öffentliche, nutzerfreundliche und responsive Web-App für den Vertretungsplan des Gymnasium Lohbrügge." />
+					<meta property="og:locale" content="de_DE" />
 					<meta property="og:type" content="website" />
-					<meta property="og:image" content={`https://${process.env.HOSTNAME}/api/preview/current`} />
+					<meta property="og:image" content="android-chrome-512x512.png" />
+					<meta property="og:image:width" content="512" />
+					<meta property="og:image:height" content="512" />
+					<meta property="og:image:type" content="image/png" />
+					<meta property="og:image:alt" content="Gyloh-Planner-Logo" />
+					<meta property="og:url" content={SERVER} />
 				</Head>
 				<body>
 					<Main />
