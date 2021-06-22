@@ -24,8 +24,8 @@ const useStyles = makeStyles(theme => ({
 		}
 	},
 	noEntries: {
-		marginTop: theme.spacing(2),
-		fontStyle: "italic"
+		margin: theme.spacing(2),
+		fontStyle: "italic",
 	}
 }))
 
