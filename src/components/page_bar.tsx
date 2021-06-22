@@ -18,12 +18,10 @@ interface PageBarProps {
 
 const PageBar: React.FC<PageBarProps> = ({ title }) => {
 	const classes = useStyles();
-	const trigger = useScrollTrigger({ target: typeof window === "undefined" ? undefined : window});
 	const theme = useTheme();
 	const smallSubtitle = useMediaQuery(theme.breakpoints.down("xs"));
 	return (
-		<Slide appear={false} direction="down" in={!trigger}>
-			<AppBar position="sticky">
+			<AppBar position="relative">
 				<Toolbar>
 					<PageNav />
 					<span className={classes.heading}>
@@ -33,7 +31,6 @@ const PageBar: React.FC<PageBarProps> = ({ title }) => {
 					<ThemeSwitch />
 				</Toolbar>
 			</AppBar>
-		</Slide>
 	);
 }
 
