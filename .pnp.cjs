@@ -42,7 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.0"],
             ["@types/react-syntax-highlighter", "npm:13.5.0"],
             ["cors", "npm:2.8.5"],
-            ["gyloh-webuntis-api", "npm:1.5.7"],
+            ["gyloh-webuntis-api", "npm:1.5.8"],
             ["html-to-react", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:1.4.5"],
             ["next", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:10.0.3"],
             ["react", "npm:17.0.1"],
@@ -1261,11 +1261,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["axios", [
-        ["npm:0.21.0", {
-          "packageLocation": "./.yarn/cache/axios-npm-0.21.0-9223cb0552-ed838dc537.zip/node_modules/axios/",
+        ["npm:0.21.4", {
+          "packageLocation": "./.yarn/cache/axios-npm-0.21.4-e278873748-44245f24ac.zip/node_modules/axios/",
           "packageDependencies": [
-            ["axios", "npm:0.21.0"],
-            ["follow-redirects", "npm:1.13.0"]
+            ["axios", "npm:0.21.4"],
+            ["follow-redirects", "virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.14.4"]
           ],
           "linkType": "HARD",
         }]
@@ -3124,10 +3124,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["follow-redirects", [
-        ["npm:1.13.0", {
-          "packageLocation": "./.yarn/cache/follow-redirects-npm-1.13.0-ae26ae301a-684165a783.zip/node_modules/follow-redirects/",
+        ["npm:1.14.4", {
+          "packageLocation": "./.yarn/cache/follow-redirects-npm-1.14.4-19eb02e590-d4ce74cf5c.zip/node_modules/follow-redirects/",
           "packageDependencies": [
-            ["follow-redirects", "npm:1.13.0"]
+            ["follow-redirects", "npm:1.14.4"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.14.4", {
+          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-60ab585f0d/0/cache/follow-redirects-npm-1.14.4-19eb02e590-d4ce74cf5c.zip/node_modules/follow-redirects/",
+          "packageDependencies": [
+            ["follow-redirects", "virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.14.4"],
+            ["debug", null]
+          ],
+          "packagePeers": [
+            "debug"
           ],
           "linkType": "HARD",
         }]
@@ -3356,7 +3367,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.0"],
             ["@types/react-syntax-highlighter", "npm:13.5.0"],
             ["cors", "npm:2.8.5"],
-            ["gyloh-webuntis-api", "npm:1.5.7"],
+            ["gyloh-webuntis-api", "npm:1.5.8"],
             ["html-to-react", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:1.4.5"],
             ["next", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:10.0.3"],
             ["react", "npm:17.0.1"],
@@ -3370,11 +3381,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["gyloh-webuntis-api", [
-        ["npm:1.5.7", {
-          "packageLocation": "./.yarn/cache/gyloh-webuntis-api-npm-1.5.7-a9bcd9cd4d-663d275d8f.zip/node_modules/gyloh-webuntis-api/",
+        ["npm:1.5.8", {
+          "packageLocation": "./.yarn/cache/gyloh-webuntis-api-npm-1.5.8-afcff63c95-e4baefeb46.zip/node_modules/gyloh-webuntis-api/",
           "packageDependencies": [
-            ["gyloh-webuntis-api", "npm:1.5.7"],
-            ["axios", "npm:0.21.0"],
+            ["gyloh-webuntis-api", "npm:1.5.8"],
+            ["axios", "npm:0.21.4"],
             ["he", "npm:1.2.0"]
           ],
           "linkType": "HARD",
