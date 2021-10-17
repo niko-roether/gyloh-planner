@@ -2839,7 +2839,7 @@ fsevents@~2.1.2:
     "@types/react": ^17.0.0
     "@types/react-syntax-highlighter": ^13.5.0
     cors: ^2.8.5
-    gyloh-webuntis-api: ^1.5.5
+    gyloh-webuntis-api: ^1.5.7
     html-to-react: ^1.4.5
     next: 10.0.3
     react: 17.0.1
@@ -2851,13 +2851,13 @@ fsevents@~2.1.2:
   languageName: unknown
   linkType: soft
 
-"gyloh-webuntis-api@npm:^1.5.5":
-  version: 1.5.5
-  resolution: "gyloh-webuntis-api@npm:1.5.5"
+"gyloh-webuntis-api@npm:^1.5.7":
+  version: 1.5.7
+  resolution: "gyloh-webuntis-api@npm:1.5.7"
   dependencies:
     axios: ^0.21.0
     he: ^1.2.0
-  checksum: d2f781da77b863810751bba0a70d55c677e170b48bfa1ce2c42489a3ac5b91ddb87c594c045b658fe9c8be5eb2c2e9c7866e0a0c6b06024a52c0ef143f47df84
+  checksum: 663d275d8ff85ae72495473e3a4cefed1998ec3d70b34995d3b7082962092b27ae57037fde08383ebe36e718a37497d80e433fcd32210c04bf1797baa54c25f6
   languageName: node
   linkType: hard
 

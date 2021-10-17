@@ -42,7 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.0"],
             ["@types/react-syntax-highlighter", "npm:13.5.0"],
             ["cors", "npm:2.8.5"],
-            ["gyloh-webuntis-api", "npm:1.5.5"],
+            ["gyloh-webuntis-api", "npm:1.5.7"],
             ["html-to-react", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:1.4.5"],
             ["next", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:10.0.3"],
             ["react", "npm:17.0.1"],
@@ -3356,7 +3356,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.0"],
             ["@types/react-syntax-highlighter", "npm:13.5.0"],
             ["cors", "npm:2.8.5"],
-            ["gyloh-webuntis-api", "npm:1.5.5"],
+            ["gyloh-webuntis-api", "npm:1.5.7"],
             ["html-to-react", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:1.4.5"],
             ["next", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:10.0.3"],
             ["react", "npm:17.0.1"],
@@ -3370,10 +3370,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["gyloh-webuntis-api", [
-        ["npm:1.5.5", {
-          "packageLocation": "./.yarn/cache/gyloh-webuntis-api-npm-1.5.5-8b5c1eb742-d2f781da77.zip/node_modules/gyloh-webuntis-api/",
+        ["npm:1.5.7", {
+          "packageLocation": "./.yarn/cache/gyloh-webuntis-api-npm-1.5.7-a9bcd9cd4d-663d275d8f.zip/node_modules/gyloh-webuntis-api/",
           "packageDependencies": [
-            ["gyloh-webuntis-api", "npm:1.5.5"],
+            ["gyloh-webuntis-api", "npm:1.5.7"],
             ["axios", "npm:0.21.0"],
             ["he", "npm:1.2.0"]
           ],
