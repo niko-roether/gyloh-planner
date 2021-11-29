@@ -1,5 +1,5 @@
-import { IconButton } from "@material-ui/core";
-import { BrightnessHigh as BrightnessHighIcon, BrightnessLow as BrightnessLowIcon } from "@material-ui/icons";
+import { IconButton } from "@mui/material";
+import { BrightnessHigh as BrightnessHighIcon, BrightnessLow as BrightnessLowIcon } from "@mui/icons-material";
 import React, { useContext } from "react";
 import { ThemeContext, ThemeName } from "./theme_manager";
 

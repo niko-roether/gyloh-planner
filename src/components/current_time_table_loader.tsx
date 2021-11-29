@@ -1,6 +1,6 @@
 import React from "react";
 import ResponsiveListView from "./responsive_list_view";
-import { CalendarToday as CalenderIcon } from "@material-ui/icons";
+import { CalendarToday as CalenderIcon } from "@mui/icons-material";
 import { TimeTable } from "gyloh-webuntis-api";
 import TimeTableView from "./time_table_view";
 import { getCurrentTables } from "../api_consume/consume_table";

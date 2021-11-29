@@ -1,4 +1,4 @@
-import { Theme, ThemeProvider } from "@material-ui/core";
+import { Theme, ThemeProvider } from "@mui/material";
 import React from "react";
 
 export enum ThemeName {

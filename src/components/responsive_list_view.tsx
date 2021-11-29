@@ -1,15 +1,23 @@
-import { Box, Button, CircularProgress, Hidden, makeStyles, MobileStepper, Paper, Step, StepButton, Stepper, useTheme } from "@material-ui/core";
-import { FiberManualRecord as CircleIcon, KeyboardArrowLeft as KeyboardArrowLeftIcon, KeyboardArrowRight as KeyboardArrowRightIcon, SvgIconComponent } from "@material-ui/icons";
+import { Box, Button, CircularProgress, Hidden, MobileStepper, Paper, Step, StepButton, Stepper, Theme, useTheme } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { FiberManualRecord as CircleIcon, KeyboardArrowLeft as KeyboardArrowLeftIcon, KeyboardArrowRight as KeyboardArrowRightIcon, SvgIconComponent } from "@mui/icons-material";
+import BackToTop from "./back_to_top";
 import React from "react";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
 	step: {
 		padding: theme.spacing(0, 5)
 	},
 	controls: {
 		display: "flex",
 		justifyContent: "center",
-		padding: theme.spacing(0, 2)
+		padding: theme.spacing(0, 2),
+	},
+	desktopControlsWrapper: {
+		position: "sticky",
+		top: 0,
+		zIndex: theme.zIndex.appBar - 1,
+		padding: theme.spacing(2, 0)
 	},
 	buttonContainer: {
 		display: "flex",
@@ -44,8 +52,8 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 
 	return (
 		<Component {...componentProps}>
-			<Paper square>
-				<Hidden mdUp>
+			<Hidden mdUp>
+				<Paper square>
 					<MobileStepper
 						variant="text"
 						position="bottom"
@@ -53,23 +61,25 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 						steps={elements.length}
 						className={classes.mobileStepper}
 						nextButton={
-							<Button size="small" onClick={toNext} disabled={index === elements.length - 1}>
+							<Button size="medium" color="inherit" onClick={toNext} disabled={index === elements.length - 1}>
 							Weiter
 							{theme.direction === 'rtl' ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />}
 							</Button>
 						}
 						backButton={
-							<Button size="small" onClick={toPrev} disabled={index === 0}>
+							<Button size="medium" color="inherit" onClick={toPrev} disabled={index === 0}>
 							{theme.direction === 'rtl' ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
 							Zurück
 							</Button>
 						}
 					/>
-				</Hidden>
-				<Hidden smDown>
+				</Paper>
+			</Hidden>
+			<Hidden mdDown>
+				<Paper square elevation={2} className={classes.desktopControlsWrapper}>
 					<nav className={classes.controls}>
 						<div className={classes.buttonContainer}>
-							<Button variant="contained" color="primary" onClick={toPrev} disabled={index === 0}>
+							<Button variant="contained" color="secondary" onClick={toPrev} disabled={index === 0}>
 								{theme.direction === 'rtl' ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
 								Zurück
 							</Button>
@@ -84,14 +94,14 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 							))}
 						</Stepper>
 						<div className={classes.buttonContainer}>
-							<Button variant="contained" color="primary" onClick={toNext} disabled={index === elements.length - 1}>
+							<Button variant="contained" color="secondary" onClick={toNext} disabled={index === elements.length - 1}>
 								Weiter
 								{theme.direction === 'rtl' ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />}
 							</Button>
 						</div>
 					</nav>
-				</Hidden>
-			</Paper>
+				</Paper>
+			</Hidden>
 			{loading ? (
 				<Box marginX="auto" mt={4} textAlign="center">
 					<CircularProgress color="secondary" />

@@ -1,12 +1,11 @@
-import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import { TimeTable } from "gyloh-webuntis-api";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import { TimeTableViewEntryProps } from "../util/time_table_utils";
 import { COLUMN_TITLES, TimeTableSubViewProps } from "./time_table_view";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
 	tableContainer: {
-		maxHeight: "min(80vh, 700px)",
 		marginTop: theme.spacing(3)
 	},
 	tableHeaderCell: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	firstCell: {
 		fontWeight: "bold",
-		background: theme.palette.grey[theme.palette.type == "light" ? 200 : 900]
+		background: theme.palette.grey[theme.palette.mode == "light" ? 200 : 900]
 	},
 	row: {
 		"&:nth-child(odd)": {
@@ -68,23 +67,25 @@ const TimeTableDesktopView: React.FC<TimeTableTableDesktopViewProps> = ({ data, 
 	))
 
 	return (
-		<TableContainer component={Paper} className={fillUpScreen ? classes.screenFillingTable : classes.tableContainer}>
-			<Table stickyHeader>
-				<TableHead>
-					<TableRow>
-						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.class}</TableCell>
-						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.lesson}</TableCell>
-						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.subject}</TableCell>
-						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.teacher}</TableCell>
-						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.room}</TableCell>
-						<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.info}</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{entries}
-				</TableBody>
-			</Table>
-		</TableContainer>
+		<>
+			<TableContainer component={Paper} className={fillUpScreen ? classes.screenFillingTable : classes.tableContainer}>
+				<Table stickyHeader>
+					<TableHead>
+						<TableRow>
+							<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.class}</TableCell>
+							<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.lesson}</TableCell>
+							<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.subject}</TableCell>
+							<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.teacher}</TableCell>
+							<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.room}</TableCell>
+							<TableCell className={classes.tableHeaderCell}>{COLUMN_TITLES.info}</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{entries}
+					</TableBody>
+				</Table>
+			</TableContainer>
+		</>
 	)
 }
 

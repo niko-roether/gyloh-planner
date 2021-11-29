@@ -1,9 +1,10 @@
-import { Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, SwipeableDrawer } from "@material-ui/core";
-import { CalendarToday as CalendarTodayIcon, CalendarViewDay as CalendarViewDayIcon, Close as CloseIcon, Code as CodeIcon, Feedback as FeedbackIcon, Info as InfoIcon, Menu as MenuIcon } from "@material-ui/icons";
+import { Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, Theme, SwipeableDrawer } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { CalendarToday as CalendarTodayIcon, CalendarViewDay as CalendarViewDayIcon, Close as CloseIcon, Code as CodeIcon, Feedback as FeedbackIcon, Info as InfoIcon, Menu as MenuIcon } from "@mui/icons-material";
 import React from "react";
 import Link from "next/link";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
 	menuButton: {
 		marginRight: theme.spacing(1)
 	},

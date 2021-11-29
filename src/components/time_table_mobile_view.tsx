@@ -1,11 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Button, Card, Dialog, IconButton, List, ListItem, ListItemText, makeStyles, Slide, Table, TableBody, TableCell, TableContainer, TableRow, Toolbar, Typography, useTheme } from "@material-ui/core";
-import { TransitionProps } from "@material-ui/core/transitions/transition";
-import { Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Button, Card, Dialog, IconButton, List, ListItem, ListItemText, Slide, SlideProps, Table, TableBody, TableCell, TableContainer, TableRow, Theme, Toolbar, Typography, useTheme } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { TransitionProps } from "@mui/material/transitions/transition";
+import { Close as CloseIcon, ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import React from "react";
 import { TimeTableEntryFieldsForClass } from "../util/time_table_utils";
 import { COLUMN_TITLES, TimeTableEntryFields, TimeTableSubViewProps } from "./time_table_view";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
 	summary: {
 		overflow: "hidden",
 		width: "100%"
@@ -75,7 +76,7 @@ const ClassPopup: React.FC<ClassPopupProps> = ({ data, open, onClose }) => {
 	const theme = useTheme();
 
 	const Transition = React.forwardRef((
-		props: TransitionProps & { children?: React.ReactElement },
+		props: SlideProps & { children?: React.ReactElement },
 		ref: React.Ref<unknown>
 	) => (
 		<Slide direction="up" {...props} ref={ref} />
@@ -122,7 +123,7 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 				))}
 			</List>
 			<Box textAlign="center" marginY={2} mb={8}>
-				<Button variant="contained" onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}>
+				<Button variant="contained" color="secondary" onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}>
 					Zurück nach oben	
 				</Button>
 			</Box>

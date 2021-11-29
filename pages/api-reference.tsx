@@ -1,4 +1,5 @@
-import { Container, Link, makeStyles, Typography } from "@material-ui/core";
+import { Container, Link, Theme, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { GylohWebUntis } from "gyloh-webuntis-api";
 import { GetStaticProps } from "next";
 import Head from "next/head";
@@ -8,7 +9,7 @@ import Heading from "../src/components/heading";
 import Page from "../src/components/page";
 import { SERVER } from "../src/config";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
 	example: {
 		maxHeight: "80vh",
 		overflow: "auto"

@@ -1,4 +1,4 @@
-import { Container, Link, Typography } from "@material-ui/core";
+import { Container, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 import Heading from "../src/components/heading";

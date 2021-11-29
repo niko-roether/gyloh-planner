@@ -1,7 +1,8 @@
-import { makeStyles, Typography, TypographyProps } from "@material-ui/core";
+import { Theme, Typography, TypographyProps } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
 	heading: {
 		margin: theme.spacing(6, 0, 3)
 	},

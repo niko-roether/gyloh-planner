@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import { GylohWebUntis, TimeTable } from "gyloh-webuntis-api";
 import { GetServerSideProps } from "next";
 import React from "react";

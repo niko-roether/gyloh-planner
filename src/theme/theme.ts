@@ -1,7 +1,6 @@
-import { createMuiTheme, SimplePaletteColorOptions } from "@material-ui/core";
-import createBreakpoints, { BreakpointOverrides } from "@material-ui/core/styles/createBreakpoints";
+import { createTheme, SimplePaletteColorOptions } from "@mui/material";
 
-const breakpoints = createBreakpoints({
+const breakpoints = {
 	values: {
 		xs: 0,
 		sm: 600,
@@ -9,7 +8,7 @@ const breakpoints = createBreakpoints({
 		lg: 1280,
 		xl: 1920
 	}
-})
+}
 
 const primary: SimplePaletteColorOptions = {
 	main: "#002860",
@@ -21,9 +20,9 @@ const secondary: SimplePaletteColorOptions = {
 	contrastText: "#fff",
 }
 
-const lightTheme = createMuiTheme({
+const lightTheme = createTheme({
 	palette: {
-		type: "light",
+		mode: "light",
 		primary,
 		secondary,
 		background: {
@@ -34,14 +33,14 @@ const lightTheme = createMuiTheme({
 	breakpoints
 });
 
-const darkTheme = createMuiTheme({
+const darkTheme = createTheme({
 	palette: {
-		type: "dark",
+		mode: "dark",
 		primary,
 		secondary,
 		background: {
 			default: "#2a2a2e",
-			paper: "#38383d"
+			paper: "#2a2a2e"
 		}
 	},
 	breakpoints

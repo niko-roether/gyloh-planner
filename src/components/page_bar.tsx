@@ -1,4 +1,5 @@
-import { AppBar, makeStyles, Slide, Toolbar, Typography, useMediaQuery, useScrollTrigger, useTheme } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import PageNav from "./page_nav";
 import ThemeSwitch from "./theme_switch";
@@ -21,7 +22,7 @@ const PageBar: React.FC<PageBarProps> = ({ title }) => {
 	const theme = useTheme();
 	const smallSubtitle = useMediaQuery(theme.breakpoints.down("xs"));
 	return (
-			<AppBar position="relative">
+			<AppBar position="relative" enableColorOnDark color="primary" sx={{ backgroundImage: "none" }}>
 				<Toolbar>
 					<PageNav />
 					<span className={classes.heading}>

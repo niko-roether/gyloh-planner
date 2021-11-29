@@ -1,8 +1,9 @@
-import { Box, Button, Input, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
+import { Box, Button, Input, Theme, useMediaQuery, useTheme } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import Heading from "./heading";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
 	dateInput: {
 		fontSize: "1em",
 		marginLeft: theme.spacing(4),
