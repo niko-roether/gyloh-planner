@@ -112,7 +112,7 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 	
 	return (
 		<React.Fragment>
-			<List>
+			<List sx={{ mb: 4 }}>
 				{data.map(({ class: cls, fields: { length } }, i) => (
 					<ListItem key={i} button onClick={() => goToClass(cls)} divider>
 						<ListItemText 
@@ -122,11 +122,6 @@ const TimeTableMobileView: React.FC<TimeTableSubViewProps> = ({ data }) => {
 					</ListItem>
 				))}
 			</List>
-			<Box textAlign="center" marginY={2} mb={8}>
-				<Button variant="contained" color="secondary" onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}>
-					Zurück nach oben	
-				</Button>
-			</Box>
 			{currentClass && <ClassPopup 
 				data={data.find(d => d.class === currentClass) as TimeTableEntryFieldsForClass} 
 				onClose={back} 

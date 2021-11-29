@@ -4,12 +4,11 @@ import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { lightTheme as theme } from '../src/theme/theme';
 import { SERVER } from '../src/config';
-import polyfill from "../src/polyfill";
 
 export default class MyDocument extends Document {
 	render() {
 		return (
-			<Html lang="de" prefix="og: https://ogp.me/ns#" onLoad={() => polyfill()}>
+			<Html lang="de" prefix="og: https://ogp.me/ns#">
 				<Head>
 					{/* PWA primary color */}
 					<meta name="theme-color" content={theme.palette.primary.main} />
