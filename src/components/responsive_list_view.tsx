@@ -5,8 +5,8 @@ import BackToTop from "./back_to_top";
 import React from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
-	step: {
-		padding: theme.spacing(0, 5)
+	stepper: {
+		width: theme.spacing(50),
 	},
 	controls: {
 		display: "flex",
@@ -62,14 +62,14 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 						className={classes.mobileStepper}
 						nextButton={
 							<Button size="medium" color="inherit" onClick={toNext} disabled={index === elements.length - 1}>
-							Weiter
-							{theme.direction === 'rtl' ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />}
+								Weiter
+								{theme.direction === 'rtl' ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />}
 							</Button>
 						}
 						backButton={
 							<Button size="medium" color="inherit" onClick={toPrev} disabled={index === 0}>
-							{theme.direction === 'rtl' ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
-							Zurück
+								{theme.direction === 'rtl' ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
+								Zurück
 							</Button>
 						}
 					/>
@@ -84,9 +84,9 @@ const ResponsiveListView: React.FC<ResponsiveListViewProps<any>> = ({component =
 								Zurück
 							</Button>
 						</div>
-						<Stepper activeStep={index} alternativeLabel nonLinear>
+						<Stepper activeStep={index} alternativeLabel nonLinear className={classes.stepper}>
 							{elements.map((_, i) => (
-								<Step className={classes.step} key={i}>
+								<Step key={i}>
 									<StepButton onClick={() => setIndex(i)} icon={<IconComponent color={index === i ? "inherit" : "disabled"} />}>
 										{titles ? titles[i] : i + 1}
 									</StepButton>

@@ -36,13 +36,13 @@ interface TimeTableMobileViewEntryProps {
 const TimeTableMobileViewEntry: React.FC<TimeTableMobileViewEntryProps> = ({ fields }) => {
 	const classes = useStyles();
 	return (
-		<Accordion className={classes.accordion} square>
+		<Accordion className={classes.accordion} square elevation={1}>
 			<AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon />}>
 				<Typography className={classes.subject}>{fields.subject}</Typography>
 				<Typography className={classes.lesson}>{fields.lesson}</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<TableContainer component={Card} variant="outlined">
+				<TableContainer component={Card} elevation={2}>
 					<Table>
 						<TableBody>
 							<TableRow>
@@ -83,8 +83,8 @@ const ClassPopup: React.FC<ClassPopupProps> = ({ data, open, onClose }) => {
 	));
 
 	return (
-		<Dialog fullScreen open={open} TransitionComponent={Transition} onClose={onClose} PaperProps={{style: {backgroundColor: theme.palette.background.default}}}>
-			<AppBar position="static">
+		<Dialog fullScreen open={open} TransitionComponent={Transition} onClose={onClose} PaperProps={{ elevation: 0 }}>
+			<AppBar position="static" enableColorOnDark>
 				<Toolbar>
 					<IconButton edge="start" onClick={onClose} color="inherit"><CloseIcon /></IconButton>
 					<Typography variant="h6">{data.class}</Typography>
