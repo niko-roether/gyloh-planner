@@ -19,9 +19,9 @@ export interface BackToTopProps {
 
 const BackToTop = ({ verticalOffset }: BackToTopProps) => {
 	const classes = useStyles();
-	const hidden = useScrollTrigger({ threshold: 300 });
+	const shown = useScrollTrigger({ threshold: 300, disableHysteresis: true });
 	return (
-		<Fab color="secondary" className={classes.button} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} sx={{ marginBottom: verticalOffset ?? 0, opacity: hidden ? 1 : 0 }}>
+		<Fab color="secondary" disabled={!shown} className={classes.button} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} sx={{ marginBottom: verticalOffset ?? 0, opacity: shown ? 1 : 0 }}>
 			<ArrowUpwardIcon />
 		</Fab>
 	)
