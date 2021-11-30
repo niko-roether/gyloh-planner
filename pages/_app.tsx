@@ -1,5 +1,4 @@
 import React from "react";
-import { AppProps } from "next/dist/next-server/lib/router/router"
 import ThemeManager, { ThemeName } from "../src/components/theme_manager";
 import { darkTheme, lightTheme } from "../src/theme/theme";
 import { CacheProvider } from "@emotion/react";
@@ -12,7 +11,7 @@ import Head from "next/head";
 
 const clientEmotionCache = createEmotionCache();
 
-const App: React.FC<AppProps> = ({Component, emotionCache = clientEmotionCache, pageProps}) => {
+const App = ({Component, emotionCache = clientEmotionCache, pageProps}: any) => {
 	React.useEffect(() => polyfill());
 	return (
 		<CacheProvider value={emotionCache}>
