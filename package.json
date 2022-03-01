@@ -16,7 +16,7 @@
     "@mui/material": "^5.2.2",
     "@mui/styles": "^5.2.2",
     "cors": "^2.8.5",
-    "gyloh-webuntis-api": "^1.5.10",
+    "gyloh-webuntis-api": "^1.5.11",
     "html-to-react": "^1.4.5",
     "next": "^11.0.0",
     "react": "^17.0.1",
