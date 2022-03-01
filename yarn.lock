@@ -2187,7 +2187,7 @@ fsevents@~2.3.1:
     "@types/react-syntax-highlighter": ^13.5.0
     "@types/smoothscroll-polyfill": ^0.3.1
     cors: ^2.8.5
-    gyloh-webuntis-api: ^1.5.11
+    gyloh-webuntis-api: ^1.5.12
     html-to-react: ^1.4.5
     next: ^11.0.0
     react: ^17.0.1
@@ -2200,13 +2200,13 @@ fsevents@~2.3.1:
   languageName: unknown
   linkType: soft
 
-"gyloh-webuntis-api@npm:^1.5.11":
-  version: 1.5.11
-  resolution: "gyloh-webuntis-api@npm:1.5.11"
+"gyloh-webuntis-api@npm:^1.5.12":
+  version: 1.5.12
+  resolution: "gyloh-webuntis-api@npm:1.5.12"
   dependencies:
     axios: ^0.21.0
     he: ^1.2.0
-  checksum: b234e28293d793b5c490fdc94e6ea8ae2fe1e6fa821b058ae5ac73de73d033941d9295d2a4c9a3bb1244173dea09852fc0f3661b9a3c531d4413f9b3d13d975e
+  checksum: d723f0b643889b8029d7bf019fe0ab1e6772a7d27443b22ca4d931ccce5082c125e8edc41c89a812cca3a24bce3005cc89c81d71400e71652f2d058a5c5a4915
   languageName: node
   linkType: hard
 

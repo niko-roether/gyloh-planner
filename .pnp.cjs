@@ -48,7 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-syntax-highlighter", "npm:13.5.0"],
             ["@types/smoothscroll-polyfill", "npm:0.3.1"],
             ["cors", "npm:2.8.5"],
-            ["gyloh-webuntis-api", "npm:1.5.11"],
+            ["gyloh-webuntis-api", "npm:1.5.12"],
             ["html-to-react", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:1.4.5"],
             ["next", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:11.1.2"],
             ["react", "npm:17.0.2"],
@@ -2731,7 +2731,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-syntax-highlighter", "npm:13.5.0"],
             ["@types/smoothscroll-polyfill", "npm:0.3.1"],
             ["cors", "npm:2.8.5"],
-            ["gyloh-webuntis-api", "npm:1.5.11"],
+            ["gyloh-webuntis-api", "npm:1.5.12"],
             ["html-to-react", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:1.4.5"],
             ["next", "virtual:9d06cfa041eb8080309ac85b33fc99ea7adce8f7e8c277b9d18566aada76e164dea8bef6f9df7051e7b9e0ec4aaefe67e435630e6a5939946fa20f382e60867c#npm:11.1.2"],
             ["react", "npm:17.0.2"],
@@ -2746,10 +2746,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["gyloh-webuntis-api", [
-        ["npm:1.5.11", {
-          "packageLocation": "./.yarn/cache/gyloh-webuntis-api-npm-1.5.11-b181f12e81-b234e28293.zip/node_modules/gyloh-webuntis-api/",
+        ["npm:1.5.12", {
+          "packageLocation": "./.yarn/cache/gyloh-webuntis-api-npm-1.5.12-ec8bcd5e95-d723f0b643.zip/node_modules/gyloh-webuntis-api/",
           "packageDependencies": [
-            ["gyloh-webuntis-api", "npm:1.5.11"],
+            ["gyloh-webuntis-api", "npm:1.5.12"],
             ["axios", "npm:0.21.4"],
             ["he", "npm:1.2.0"]
           ],
