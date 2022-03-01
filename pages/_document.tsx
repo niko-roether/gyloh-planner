@@ -2,7 +2,6 @@ import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../src/createEmotionCache";
-import { lightTheme as theme } from '../src/theme/theme';
 import { SERVER } from '../src/config';
 
 export default class MyDocument extends Document {
@@ -11,7 +10,6 @@ export default class MyDocument extends Document {
 			<Html lang="de" prefix="og: https://ogp.me/ns#">
 				<Head>
 					{/* PWA primary color */}
-					<meta name="theme-color" content={theme.palette.primary.main} />
 					<link rel="manifest" href="site.webmanifest" />
 					<link
 						rel="stylesheet"

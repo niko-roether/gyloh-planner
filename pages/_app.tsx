@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeManager, { ThemeName } from "../src/components/theme_manager";
+import ThemeManager, { ThemeContext, ThemeName } from "../src/components/theme_manager";
 import { darkTheme, lightTheme } from "../src/theme/theme";
 import { CacheProvider } from "@emotion/react";
 import polyfill from "../src/polyfill";
@@ -15,10 +15,15 @@ const App = ({Component, emotionCache = clientEmotionCache, pageProps}: any) => 
 	React.useEffect(() => polyfill());
 	return (
 		<CacheProvider value={emotionCache}>
-			<Head>
-				<meta name="viewport" content="initial-scale=1, width=device-width" />
-			</Head>
 			<ThemeManager lightTheme={lightTheme} darkTheme={darkTheme} defaultTheme={ThemeName.LIGHT}>
+				<Head>
+					<meta name="viewport" content="initial-scale=1, width=device-width" />
+					<ThemeContext.Consumer>
+						{(themeName: ThemeName) => ((
+							<meta name="theme-color" content={(themeName == ThemeName.LIGHT ? lightTheme : darkTheme).palette.background.default} />
+						))}
+					</ThemeContext.Consumer>
+				</Head>
 				<CssBaseline />
 				<Component {...pageProps} />
 			</ThemeManager>
