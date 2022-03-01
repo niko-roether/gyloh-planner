@@ -19,9 +19,9 @@ const App = ({Component, emotionCache = clientEmotionCache, pageProps}: any) => 
 				<Head>
 					<meta name="viewport" content="initial-scale=1, width=device-width" />
 					<ThemeContext.Consumer>
-						{({themeName: ThemeName}) => ((
+						{({themeName}) => (
 							<meta name="theme-color" content={(themeName == ThemeName.LIGHT ? lightTheme : darkTheme).palette.background.default} />
-						))}
+						)}
 					</ThemeContext.Consumer>
 				</Head>
 				<CssBaseline />
